@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Poppins:wght@500;600;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=11" />
+  <link rel="stylesheet" href="css/style.css?v=12" />
 </head>
 <body>
   <div class="bg-glow" aria-hidden="true"></div>
@@ -28,7 +28,7 @@
       <a href="#douyin">抖音</a>
       <a href="#about">关于</a>
       <a href="#works">作品</a>
-      <a href="#play">游戏</a>
+      <a href="#tools">工具</a>
       <a href="#support">应援</a>
       <a href="#timeline">轨迹</a>
       <a href="#assets">素材</a>
@@ -230,37 +230,126 @@
       </div>
     </section>
 
-    <!-- 互动小游戏 -->
-    <section class="section play" id="play">
+    <!-- 实用工具（纯前端，无需后端） -->
+    <section class="section tools" id="tools">
       <div class="container">
         <div class="section-head">
           <p class="eyebrow">
             <span class="eyebrow-dot" aria-hidden="true"></span>
-            Play with HanBaby
+            Fan Toolkit
           </p>
-          <h2>小宇宙游戏屋</h2>
-          <p class="section-desc">三款轻互动：接爱心、翻牌配对、疯狂比心。分数保存在本机，纯属好玩～</p>
+          <h2>应援实用工具</h2>
+          <p class="section-desc">
+            无后端、无账号。文案一键复制、海报本机生成、打卡只记在你的浏览器里——真正能用上的小工具。
+          </p>
         </div>
 
-        <div class="game-tabs" role="tablist" aria-label="小游戏切换">
-          <button type="button" class="game-tab active" data-game="catch" role="tab" aria-selected="true">接爱心</button>
-          <button type="button" class="game-tab" data-game="memory" role="tab" aria-selected="false">翻牌配对</button>
-          <button type="button" class="game-tab" data-game="tap" role="tab" aria-selected="false">疯狂比心</button>
-        </div>
+        <div class="tools-grid">
+          <!-- 1 快捷入口 -->
+          <article class="tool-card glass">
+            <div class="tool-head">
+              <span class="tool-icon">↗</span>
+              <div>
+                <h3>抖音快捷操作</h3>
+                <p>打开主页、复制链接与分享文案</p>
+              </div>
+            </div>
+            <div class="tool-body tool-actions-col">
+              <a class="btn btn-primary" href="https://v.douyin.com/3Ed4QuQJTBA/" target="_blank" rel="noopener noreferrer">打开抖音主页</a>
+              <button type="button" class="btn btn-ghost" id="toolCopyLink">复制主页链接</button>
+              <button type="button" class="btn btn-outline" id="toolCopyShare">复制分享文案</button>
+              <button type="button" class="btn btn-ghost" id="toolCopyId">复制抖音号 81183888747</button>
+            </div>
+          </article>
 
-        <div class="game-shell glass">
-          <div class="game-hud">
-            <div class="game-stat"><span>得分</span><strong id="gameScore">0</strong></div>
-            <div class="game-stat"><span>时间</span><strong id="gameTime">—</strong></div>
-            <div class="game-stat"><span>最高</span><strong id="gameBest">0</strong></div>
-          </div>
-          <p class="game-tip" id="gameTip">点开始，接住下落的爱心 ♡（点到星星 ✦ 会扣分哦）</p>
-          <div class="game-stage" id="gameStage" aria-live="polite"></div>
-          <div class="game-actions">
-            <button type="button" class="btn btn-primary" id="gameStartBtn">开始游戏</button>
-            <button type="button" class="btn btn-ghost" id="gameResetBtn">重来</button>
-          </div>
-          <p class="game-result" id="gameResult" hidden></p>
+          <!-- 2 文案库 -->
+          <article class="tool-card glass tool-card-wide">
+            <div class="tool-head">
+              <span class="tool-icon">✎</span>
+              <div>
+                <h3>应援文案库</h3>
+                <p>评论 / 祝福模板，点一下复制，去抖音粘贴即可</p>
+              </div>
+            </div>
+            <div class="tool-body">
+              <div class="copy-list" id="copyList"></div>
+            </div>
+          </article>
+
+          <!-- 3 海报生成 -->
+          <article class="tool-card glass tool-card-wide">
+            <div class="tool-head">
+              <span class="tool-icon">✦</span>
+              <div>
+                <h3>应援海报生成</h3>
+                <p>浏览器里画好 PNG，直接下载发群/做壁纸（不上传服务器）</p>
+              </div>
+            </div>
+            <div class="tool-body poster-layout">
+              <div class="poster-form">
+                <label>
+                  你的署名
+                  <input type="text" id="posterName" maxlength="12" placeholder="例：星河小糖" value="憨家军" />
+                </label>
+                <label>
+                  想对她说
+                  <textarea id="posterMsg" maxlength="40" rows="2" placeholder="一句真心话">十万份喜欢，继续陪你闪耀</textarea>
+                </label>
+                <label>
+                  配色
+                  <select id="posterTheme">
+                    <option value="pink">樱花粉</option>
+                    <option value="purple">薰衣草紫</option>
+                    <option value="cream">奶油金</option>
+                  </select>
+                </label>
+                <div class="hero-actions">
+                  <button type="button" class="btn btn-primary" id="posterRender">生成预览</button>
+                  <button type="button" class="btn btn-ghost" id="posterDownload">下载 PNG</button>
+                </div>
+              </div>
+              <div class="poster-preview-wrap">
+                <canvas id="posterCanvas" width="720" height="960" aria-label="应援海报预览"></canvas>
+              </div>
+            </div>
+          </article>
+
+          <!-- 4 本地打卡 -->
+          <article class="tool-card glass">
+            <div class="tool-head">
+              <span class="tool-icon">★</span>
+              <div>
+                <h3>每日应援打卡</h3>
+                <p>连续打卡只存在本机，换设备不会同步</p>
+              </div>
+            </div>
+            <div class="tool-body">
+              <div class="checkin-stats">
+                <div><span>今日</span><strong id="checkinToday">未打卡</strong></div>
+                <div><span>连续</span><strong id="checkinStreak">0 天</strong></div>
+                <div><span>累计</span><strong id="checkinTotal">0 天</strong></div>
+              </div>
+              <button type="button" class="btn btn-primary" id="checkinBtn">今日打卡 ♡</button>
+              <div class="checkin-cal" id="checkinCal" aria-label="近 28 天打卡"></div>
+            </div>
+          </article>
+
+          <!-- 5 素材捷径 -->
+          <article class="tool-card glass">
+            <div class="tool-head">
+              <span class="tool-icon">⇩</span>
+              <div>
+                <h3>素材捷径</h3>
+                <p>常用图快速下载，完整列表见下方素材区</p>
+              </div>
+            </div>
+            <div class="tool-body tool-actions-col">
+              <button type="button" class="btn btn-ghost" data-quick-dl="assets/hero_1.png">下载主视觉</button>
+              <button type="button" class="btn btn-ghost" data-quick-dl="assets/douyin/avatar.jpg">下载头像</button>
+              <button type="button" class="btn btn-ghost" data-quick-dl="assets/hero_2.png">下载横幅图</button>
+              <a class="btn btn-outline" href="#assets">去素材下载区 →</a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -444,6 +533,7 @@
         <a href="#home">首页</a>
         <a href="#support">应援</a>
         <a href="#works">作品</a>
+        <a href="#tools">工具</a>
         <a href="#assets">素材</a>
       </div>
       <p class="disclaimer">本站为粉丝应援非官方站点示例，与平台无直接隶属关系。请理性应援，遵守平台规则与法律法规。</p>
@@ -464,9 +554,9 @@
       <span class="bn-icon heart">♡</span>
       <span>应援</span>
     </a>
-    <a href="#play" class="bn-item" data-nav="play">
+    <a href="#tools" class="bn-item" data-nav="tools">
       <span class="bn-icon">✦</span>
-      <span>游戏</span>
+      <span>工具</span>
     </a>
     <a href="#join" class="bn-item" data-nav="join">
       <span class="bn-icon">◎</span>
@@ -486,7 +576,7 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=11"></script>
-  <script src="js/games.js?v=11"></script>
+  <script src="js/main.js?v=12"></script>
+  <script src="js/tools.js?v=12"></script>
 </body>
 </html>

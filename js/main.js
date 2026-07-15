@@ -798,7 +798,7 @@
   }
 
   function updateBottomNav() {
-    const sections = ["home", "works", "play", "support", "join"];
+    const sections = ["home", "works", "tools", "support", "join"];
     let current = "home";
     const y = window.scrollY + 120;
     sections.forEach((id) => {
