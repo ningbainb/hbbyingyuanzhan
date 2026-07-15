@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Poppins:wght@500;600;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=10" />
+  <link rel="stylesheet" href="css/style.css?v=11" />
 </head>
 <body>
   <div class="bg-glow" aria-hidden="true"></div>
@@ -28,6 +28,7 @@
       <a href="#douyin">抖音</a>
       <a href="#about">关于</a>
       <a href="#works">作品</a>
+      <a href="#play">游戏</a>
       <a href="#support">应援</a>
       <a href="#timeline">轨迹</a>
       <a href="#assets">素材</a>
@@ -226,6 +227,41 @@
           单条视频链受平台限制，卡片统一跳转主页短链；点卡片或「去抖音看 TA」即可打开。
           <a href="https://v.douyin.com/3Ed4QuQJTBA/" target="_blank" rel="noopener noreferrer">直接打开主页 →</a>
         </p>
+      </div>
+    </section>
+
+    <!-- 互动小游戏 -->
+    <section class="section play" id="play">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">
+            <span class="eyebrow-dot" aria-hidden="true"></span>
+            Play with HanBaby
+          </p>
+          <h2>小宇宙游戏屋</h2>
+          <p class="section-desc">三款轻互动：接爱心、翻牌配对、疯狂比心。分数保存在本机，纯属好玩～</p>
+        </div>
+
+        <div class="game-tabs" role="tablist" aria-label="小游戏切换">
+          <button type="button" class="game-tab active" data-game="catch" role="tab" aria-selected="true">接爱心</button>
+          <button type="button" class="game-tab" data-game="memory" role="tab" aria-selected="false">翻牌配对</button>
+          <button type="button" class="game-tab" data-game="tap" role="tab" aria-selected="false">疯狂比心</button>
+        </div>
+
+        <div class="game-shell glass">
+          <div class="game-hud">
+            <div class="game-stat"><span>得分</span><strong id="gameScore">0</strong></div>
+            <div class="game-stat"><span>时间</span><strong id="gameTime">—</strong></div>
+            <div class="game-stat"><span>最高</span><strong id="gameBest">0</strong></div>
+          </div>
+          <p class="game-tip" id="gameTip">点开始，接住下落的爱心 ♡（点到星星 ✦ 会扣分哦）</p>
+          <div class="game-stage" id="gameStage" aria-live="polite"></div>
+          <div class="game-actions">
+            <button type="button" class="btn btn-primary" id="gameStartBtn">开始游戏</button>
+            <button type="button" class="btn btn-ghost" id="gameResetBtn">重来</button>
+          </div>
+          <p class="game-result" id="gameResult" hidden></p>
+        </div>
       </div>
     </section>
 
@@ -428,9 +464,9 @@
       <span class="bn-icon heart">♡</span>
       <span>应援</span>
     </a>
-    <a href="#assets" class="bn-item" data-nav="assets">
+    <a href="#play" class="bn-item" data-nav="play">
       <span class="bn-icon">✦</span>
-      <span>素材</span>
+      <span>游戏</span>
     </a>
     <a href="#join" class="bn-item" data-nav="join">
       <span class="bn-icon">◎</span>
@@ -450,6 +486,7 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=10"></script>
+  <script src="js/main.js?v=11"></script>
+  <script src="js/games.js?v=11"></script>
 </body>
 </html>

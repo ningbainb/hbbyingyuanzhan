@@ -339,9 +339,373 @@ ol {
 }
 
 .section.works,
+.section.play,
 .section.douyin-sec,
 .section.assets-sec {
   background: linear-gradient(180deg, transparent 0%, rgba(243, 239, 248, 0.45) 18%, rgba(243, 239, 248, 0.45) 82%, transparent 100%);
+}
+
+/* ========== Mini games ========== */
+.game-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  padding: 0.35rem;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+  border: 1px solid rgba(203, 184, 255, 0.3);
+  box-shadow: var(--shadow-soft);
+}
+
+.game-tab {
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--muted);
+  transition: 0.25s var(--ease);
+}
+
+.game-tab:hover {
+  color: var(--dream-purple);
+  background: rgba(203, 184, 255, 0.15);
+}
+
+.game-tab.active {
+  color: #fff;
+  background: var(--grad-btn);
+  box-shadow: 0 6px 16px rgba(255, 159, 200, 0.35);
+}
+
+.game-shell {
+  max-width: 720px;
+  margin-inline: auto;
+  padding: 1.25rem 1.15rem 1.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+}
+
+.game-hud {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+  margin-bottom: 0.85rem;
+}
+
+.game-stat {
+  text-align: center;
+  padding: 0.55rem 0.35rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(243, 239, 248, 0.95);
+  box-shadow: var(--shadow-soft);
+}
+
+.game-stat span {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-bottom: 0.15rem;
+}
+
+.game-stat strong {
+  font-family: var(--font-num);
+  font-size: 1.25rem;
+  background: linear-gradient(120deg, var(--pink-deep), var(--dream-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.game-tip {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.85rem;
+  line-height: 1.55;
+}
+
+.game-stage {
+  position: relative;
+  min-height: 280px;
+  border-radius: var(--radius);
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 183, 213, 0.2), transparent 45%),
+    radial-gradient(circle at 80% 80%, rgba(203, 184, 255, 0.22), transparent 42%),
+    linear-gradient(165deg, #fff8fc, #f4efff);
+  border: 1.5px dashed rgba(203, 184, 255, 0.4);
+  overflow: hidden;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.game-stage.is-playing {
+  border-style: solid;
+}
+
+.game-idle {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  gap: 0.65rem;
+  padding: 1.25rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.game-idle-icons {
+  font-size: 1.6rem;
+  letter-spacing: 0.35rem;
+  color: var(--pink-deep);
+  opacity: 0.85;
+}
+
+.game-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.game-result {
+  margin-top: 0.85rem;
+  text-align: center;
+  font-weight: 600;
+  color: var(--dream-purple);
+  padding: 0.65rem 0.9rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(255, 232, 241, 0.9), rgba(243, 239, 248, 0.95));
+  border: 1px solid rgba(203, 184, 255, 0.35);
+}
+
+/* fall hearts */
+.fall-item {
+  position: absolute;
+  top: -12%;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  line-height: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  animation: fallDown linear forwards;
+  filter: drop-shadow(0 4px 8px rgba(169, 138, 232, 0.2));
+  z-index: 2;
+  padding: 0.2rem;
+  touch-action: manipulation;
+}
+
+.fall-item.is-heart {
+  color: #ff7eb3;
+}
+
+.fall-item.is-star {
+  color: #9b7fe8;
+}
+
+.fall-item.pop-good {
+  animation: popGood 0.2s ease-out forwards;
+  color: #ff4f9a;
+}
+
+.fall-item.pop-bad {
+  animation: popBad 0.2s ease-out forwards;
+}
+
+@keyframes fallDown {
+  from {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(340px) rotate(28deg);
+    opacity: 0.15;
+  }
+}
+
+@keyframes popGood {
+  to {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+}
+
+@keyframes popBad {
+  to {
+    transform: scale(0.6) rotate(40deg);
+    opacity: 0;
+  }
+}
+
+/* memory */
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.55rem;
+  padding: 0.9rem;
+  height: 100%;
+  min-height: 280px;
+  align-content: center;
+}
+
+.memory-card {
+  aspect-ratio: 1;
+  border-radius: 16px;
+  border: 1.5px solid rgba(255, 183, 213, 0.45);
+  background: linear-gradient(145deg, #fff, #f7f0ff);
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  perspective: 600px;
+}
+
+.memory-card:hover:not(.matched) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.memory-back,
+.memory-face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  transition: opacity 0.2s, transform 0.25s;
+  font-size: 1.45rem;
+}
+
+.memory-back {
+  font-family: var(--font-num);
+  font-weight: 700;
+  color: var(--dream-purple);
+  background: linear-gradient(145deg, #ffe8f1, #ebe4ff);
+}
+
+.memory-face {
+  opacity: 0;
+  transform: scale(0.7);
+  background: #fff;
+}
+
+.memory-card.open .memory-back,
+.memory-card.matched .memory-back {
+  opacity: 0;
+  transform: scale(0.7);
+}
+
+.memory-card.open .memory-face,
+.memory-card.matched .memory-face {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.memory-card.matched {
+  border-color: rgba(255, 143, 191, 0.7);
+  box-shadow: 0 0 0 2px rgba(255, 183, 213, 0.35);
+  cursor: default;
+}
+
+/* tap */
+.tap-heart-preview {
+  font-size: 3.5rem;
+  color: #ff7eb3;
+  filter: drop-shadow(0 8px 16px rgba(255, 143, 191, 0.35));
+}
+
+.tap-target {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(180px, 48vw);
+  height: min(180px, 48vw);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff, #ffe8f1 45%, #f0e6ff);
+  border: 4px solid #fff;
+  box-shadow:
+    0 16px 40px rgba(255, 143, 191, 0.35),
+    0 0 0 1px rgba(203, 184, 255, 0.3);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.tap-target.bump {
+  animation: tapBump 0.16s ease-out;
+}
+
+.tap-target-heart {
+  font-size: clamp(3rem, 12vw, 4.2rem);
+  color: #ff6fad;
+  line-height: 1;
+  filter: drop-shadow(0 4px 8px rgba(255, 111, 173, 0.35));
+}
+
+.tap-target-count {
+  position: absolute;
+  bottom: 14%;
+  font-family: var(--font-num);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--dream-purple);
+}
+
+.tap-plus {
+  position: absolute;
+  font-weight: 700;
+  color: #ff6fad;
+  animation: floatPlus 0.5s ease-out forwards;
+  pointer-events: none;
+  font-family: var(--font-num);
+}
+
+@keyframes tapBump {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.08); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes floatPlus {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-36px) scale(1.2);
+  }
+}
+
+@media (max-width: 520px) {
+  .memory-grid {
+    gap: 0.4rem;
+    padding: 0.7rem;
+  }
+  .memory-back,
+  .memory-face {
+    font-size: 1.2rem;
+  }
+  .game-stage {
+    min-height: 260px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fall-item,
+  .tap-target.bump,
+  .tap-plus {
+    animation: none !important;
+  }
 }
 
 .stats-source {
