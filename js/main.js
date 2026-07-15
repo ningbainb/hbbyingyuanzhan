@@ -31,7 +31,7 @@
       id: 1,
       title: "那个眼神一抬 · 破圈初印象",
       desc: "很多人说：刷到的第一条，就记住了憨宝宝。",
-      cover: "assets/emoji_1.png",
+      cover: "assets/emoji_1.jpg",
       likes: "高赞",
       cat: "hot",
       tag: "最高点赞",
@@ -41,7 +41,7 @@
       id: 2,
       title: "✌︎ 今日份可爱已送达",
       desc: "签名同款元气脸，日常里藏着小星星。",
-      cover: "assets/emoji_2.png",
+      cover: "assets/emoji_2.jpg",
       likes: "日常",
       cat: "daily",
       tag: "日常分享",
@@ -51,7 +51,7 @@
       id: 3,
       title: "Hi · 眨眼比耶瞬间",
       desc: "甜酷切换自如，屏幕前会心一笑。",
-      cover: "assets/emoji_3.png",
+      cover: "assets/emoji_3.jpg",
       likes: "颜值",
       cat: "look",
       tag: "颜值高光",
@@ -61,7 +61,7 @@
       id: 4,
       title: "比心特辑 · 粉丝最爱",
       desc: "比心、眨眼，都是留给憨家军的小惊喜。",
-      cover: "assets/hero_4.png",
+      cover: "assets/hero_4.jpg",
       likes: "热门",
       cat: "hot",
       tag: "粉丝最爱",
@@ -71,7 +71,7 @@
       id: 5,
       title: "十万粉丝 · 谢谢遇见",
       desc: "从第一个关注到十万份喜欢，故事还在继续。",
-      cover: "assets/hero_6.png",
+      cover: "assets/hero_6.jpg",
       likes: "纪念",
       cat: "grow",
       tag: "成长记录",
@@ -81,7 +81,7 @@
       id: 6,
       title: "粉色蝴蝶结 · 手绘感造型日",
       desc: "校服感、蝴蝶结，粉紫氛围拉满。",
-      cover: "assets/hero_7.png",
+      cover: "assets/hero_7.jpg",
       likes: "造型",
       cat: "look",
       tag: "颜值高光",
@@ -91,7 +91,7 @@
       id: 7,
       title: "奶茶在手 · 生活碎片",
       desc: "出门、发呆、喝一口，都是陪伴。",
-      cover: "assets/emoji_9.png",
+      cover: "assets/emoji_9.jpg",
       likes: "日常",
       cat: "daily",
       tag: "日常分享",
@@ -101,7 +101,7 @@
       id: 8,
       title: "水手服高光 · 漫画感出场",
       desc: "镜头前的她，像从插画里走出来。",
-      cover: "assets/emoji_8.png",
+      cover: "assets/emoji_8.jpg",
       likes: "高光",
       cat: "look",
       tag: "颜值高光",
@@ -111,7 +111,7 @@
       id: 9,
       title: "侧颜发呆 · 安静的可爱",
       desc: "不说话的时候，也很好看。",
-      cover: "assets/emoji_7.png",
+      cover: "assets/emoji_7.jpg",
       likes: "氛围",
       cat: "daily",
       tag: "日常分享",
@@ -121,7 +121,7 @@
       id: 10,
       title: "挥手问候 · 欢迎来到小宇宙",
       desc: "新朋友？先看她的主页，再回来应援。",
-      cover: "assets/hero_2.png",
+      cover: "assets/hero_2.jpg",
       likes: "欢迎",
       cat: "grow",
       tag: "成长记录",
@@ -131,7 +131,7 @@
       id: 11,
       title: "贝雷帽主视觉 · 今日份收藏",
       desc: "站内主视觉同源氛围，去抖音看动态版。",
-      cover: "assets/hero_1.png",
+      cover: "assets/hero_1.jpg",
       likes: "镇站",
       cat: "hot",
       tag: "最高点赞",
@@ -141,7 +141,7 @@
       id: 12,
       title: "托腮发呆 · 温柔停顿",
       desc: "慢一点也没关系，我们一直在。",
-      cover: "assets/hero_5.png",
+      cover: "assets/hero_5.jpg",
       likes: "温柔",
       cat: "look",
       tag: "颜值高光",
@@ -154,93 +154,93 @@
       date: "起点",
       title: "发布第一个作品",
       story: "小宇宙的第一颗星，从此开始闪烁。",
-      img: "assets/emoji_1.png",
+      img: "assets/emoji_1.jpg",
     },
     {
       date: "里程碑",
       title: "首次突破 1 万粉丝",
       story: "原来认真生活，会被看见。",
-      img: "assets/emoji_2.png",
+      img: "assets/emoji_2.jpg",
     },
     {
       date: "高光",
       title: "首条 10 万点赞作品",
       story: "那条视频，让更多人记住了憨宝宝。",
-      img: "assets/emoji_3.png",
+      img: "assets/emoji_3.jpg",
       highlight: true,
     },
     {
       date: "连接",
       title: "首次直播 · 粉丝群成立",
       story: "从单向关注，变成双向陪伴。",
-      img: "assets/emoji_7.png",
+      img: "assets/emoji_7.jpg",
     },
     {
       date: "跃升",
       title: "突破 5 万粉丝",
       story: "憨家军队伍越来越热闹了。",
-      img: "assets/emoji_9.png",
+      img: "assets/emoji_9.jpg",
     },
     {
       date: "纪念",
       title: "突破 10 万粉丝",
       story: "十万份喜欢，汇成一颗只为她闪耀的星。",
-      img: "assets/hero_1.png",
+      img: "assets/hero_1.jpg",
       highlight: true,
     },
     {
       date: "期待",
       title: "第一次生日应援 & 下一站",
       story: "故事未完，我们继续走下去。",
-      img: "assets/emoji_8.png",
+      img: "assets/emoji_8.jpg",
       highlight: true,
     },
   ];
 
   const RANKS = [
-    { name: "星河小糖", score: 9860, badge: "星河陪伴官", avatar: "assets/emoji_1.png" },
-    { name: "粉紫日记", score: 8720, badge: "紫色守护者", avatar: "assets/emoji_2.png" },
-    { name: "憨家小北", score: 8010, badge: "憨家军成员", avatar: "assets/emoji_3.png" },
-    { name: "晚风与星", score: 7450, badge: "陪伴小爱心", avatar: "assets/emoji_7.png" },
-    { name: "奶油蝴蝶结", score: 6980, badge: "初见小星星", avatar: "assets/emoji_9.png" },
+    { name: "星河小糖", score: 9860, badge: "星河陪伴官", avatar: "assets/emoji_1.jpg" },
+    { name: "粉紫日记", score: 8720, badge: "紫色守护者", avatar: "assets/emoji_2.jpg" },
+    { name: "憨家小北", score: 8010, badge: "憨家军成员", avatar: "assets/emoji_3.jpg" },
+    { name: "晚风与星", score: 7450, badge: "陪伴小爱心", avatar: "assets/emoji_7.jpg" },
+    { name: "奶油蝴蝶结", score: 6980, badge: "初见小星星", avatar: "assets/emoji_9.jpg" },
   ];
 
   const ASSETS = [
     {
       title: "官方主视觉插画",
-      meta: "PNG · 竖版 · 头像/海报",
-      img: "assets/hero_1.png",
-      file: "assets/hero_1.png",
+      meta: "JPG · 竖版 · 头像/海报",
+      img: "assets/hero_1.jpg",
+      file: "assets/hero_1.jpg",
     },
     {
       title: "挥手欢迎图",
-      meta: "PNG · 横版 · 横幅/封面",
-      img: "assets/hero_2.png",
-      file: "assets/hero_2.png",
+      meta: "JPG · 横版 · 横幅/封面",
+      img: "assets/hero_2.jpg",
+      file: "assets/hero_2.jpg",
     },
     {
       title: "比心高清立绘",
-      meta: "PNG · 正方形 · 群头像",
-      img: "assets/hero_4.png",
-      file: "assets/hero_4.png",
+      meta: "JPG · 正方形 · 群头像",
+      img: "assets/hero_4.jpg",
+      file: "assets/hero_4.jpg",
     },
     {
       title: "表情包套装预览",
-      meta: "PNG · 9 张 · 聊天应援",
-      img: "assets/emoji_2.png",
-      file: "assets/emoji_2.png",
+      meta: "JPG · 预览 · 聊天应援",
+      img: "assets/emoji_2.jpg",
+      file: "assets/emoji_2.jpg",
     },
     {
       title: "手机壁纸素材",
-      meta: "PNG · 竖屏 · 壁纸",
-      img: "assets/hero_5.png",
-      file: "assets/hero_5.png",
+      meta: "JPG · 竖屏 · 壁纸",
+      img: "assets/hero_5.jpg",
+      file: "assets/hero_5.jpg",
     },
     {
       title: "甜美特写",
-      meta: "PNG · 高清 · 灯牌/二创",
-      img: "assets/emoji_9.png",
-      file: "assets/emoji_9.png",
+      meta: "JPG · 高清 · 灯牌/二创",
+      img: "assets/emoji_9.jpg",
+      file: "assets/emoji_9.jpg",
     },
   ];
 
@@ -330,13 +330,44 @@
     toast._t = setTimeout(() => el.classList.remove("show"), 2400);
   }
 
-  function assetUrl(path) {
-    // 相对路径，兼容 GitHub Pages 子路径仓库
-    try {
-      return new URL(path, window.location.href).href;
-    } catch {
-      return path;
+  /** 站点根路径（兼容 /repo 与 /repo/ ） */
+  function siteBase() {
+    let path = window.location.pathname || "/";
+    if (/\.[a-zA-Z0-9]+$/.test(path)) {
+      path = path.slice(0, path.lastIndexOf("/") + 1);
+    } else if (!path.endsWith("/")) {
+      path += "/";
     }
+    return window.location.origin + path;
+  }
+
+  function assetUrl(path) {
+    if (!path) return "";
+    if (/^https?:\/\//i.test(path) || path.startsWith("data:")) return path;
+    path = String(path).replace(/^\.\//, "").replace(/^\//, "");
+    return siteBase() + path;
+  }
+
+  /** 图片失败兜底 + 可重试 */
+  function bindImgFallback(root = document) {
+    $$("img", root).forEach((img) => {
+      if (img.dataset.fallbackBound) return;
+      img.dataset.fallbackBound = "1";
+      img.addEventListener("error", function onErr() {
+        const tried = Number(img.dataset.retry || 0);
+        const src = img.getAttribute("src") || "";
+        if (tried < 1 && src && !src.startsWith("data:")) {
+          img.dataset.retry = "1";
+          // 纠偏路径后重试一次
+          const fixed = assetUrl(src.replace(siteBase(), "").replace(/^\//, ""));
+          img.src = fixed + (fixed.includes("?") ? "&" : "?") + "r=" + Date.now();
+          return;
+        }
+        img.classList.add("img-broken");
+        img.alt = img.alt || "图片暂时无法加载";
+        img.removeEventListener("error", onErr);
+      });
+    });
   }
 
   async function downloadAsset(path, filename) {
@@ -490,6 +521,7 @@
       </a>`
       )
       .join("");
+    bindImgFallback(grid);
     observeReveals(grid);
   }
 
@@ -526,6 +558,7 @@
         </div>
       </article>`
     ).join("");
+    bindImgFallback(track);
 
     const io = new IntersectionObserver(
       (entries) => {
@@ -549,7 +582,7 @@
       (r, i) => `
       <li class="rank-item ${i < 3 ? "top" : ""}">
         <span class="rank-num">${i + 1}</span>
-        <img class="rank-avatar" src="${r.avatar}" alt="" loading="lazy" />
+        <img class="rank-avatar" src="${r.avatar}" alt="" loading="lazy" decoding="async" width="48" height="48" />
         <div>
           <div class="name">${r.name}</div>
           <div class="badge">${r.badge}</div>
@@ -557,6 +590,7 @@
         <span class="score">${formatNum(r.score)} ♡</span>
       </li>`
     ).join("");
+    bindImgFallback(list);
   }
 
   /* ---------- Assets ---------- */
@@ -567,7 +601,7 @@
       (a, i) => `
       <article class="asset-card reveal">
         <div class="asset-preview">
-          <img src="${a.img}" alt="${a.title}" loading="lazy" />
+          <img src="${a.img}" alt="${a.title}" loading="lazy" decoding="async" />
         </div>
         <h3>${a.title}</h3>
         <p class="meta">${a.meta}</p>
@@ -582,6 +616,7 @@
         downloadAsset(a.file || a.img, name);
       });
     });
+    bindImgFallback(grid);
     observeReveals(grid);
   }
 
@@ -900,6 +935,7 @@
 
   /* ---------- Boot ---------- */
   function boot() {
+    bindImgFallback(document);
     initFloatLayer();
     initStatsObserver();
     renderWorks("all");

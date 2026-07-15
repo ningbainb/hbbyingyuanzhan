@@ -9,7 +9,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="憨宝宝的小宇宙 | HanBaby Fan Universe" />
   <meta property="og:description" content="十万份喜欢，汇成一颗只为憨宝宝闪耀的星。粉丝自发应援站。" />
-  <meta property="og:image" content="assets/hero_1.png" />
+  <meta property="og:image" content="assets/hero_1.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="assets/douyin/avatar.jpg" type="image/jpeg" />
   <link rel="apple-touch-icon" href="assets/douyin/avatar.jpg" />
@@ -17,7 +17,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Poppins:wght@500;600;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=13" />
+  <link rel="stylesheet" href="css/style.css?v=14" />
+  <!-- 保证 GitHub Pages 子路径下相对资源可解析（避免无尾斜杠时图片 404） -->
+  <script>
+    (function () {
+      var path = location.pathname;
+      if (!/\.[a-zA-Z0-9]+$/.test(path) && path.slice(-1) !== "/") {
+        location.replace(path + "/" + location.search + location.hash);
+      }
+    })();
+  </script>
+  <link rel="preload" as="image" href="assets/hero_1.jpg" />
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
@@ -53,11 +63,11 @@
         <div class="hero-visual" data-parallax>
           <div class="polaroid">
             <div class="polaroid-tape"></div>
-            <img src="assets/hero_1.png" alt="憨宝宝主视觉" class="hero-img" width="1122" height="1402" fetchpriority="high" decoding="async" />
+            <img src="assets/hero_1.jpg" alt="憨宝宝主视觉" class="hero-img" width="1122" height="1402" fetchpriority="high" decoding="async" />
             <p class="polaroid-caption">HanBaby · 今日份可爱</p>
           </div>
-          <img src="assets/emoji_2.png" alt="" class="deco-sticker s1" aria-hidden="true" />
-          <img src="assets/emoji_3.png" alt="" class="deco-sticker s2" aria-hidden="true" />
+          <img src="assets/emoji_2.jpg" alt="" class="deco-sticker s1" aria-hidden="true" />
+          <img src="assets/emoji_3.jpg" alt="" class="deco-sticker s2" aria-hidden="true" />
           <span class="deco-heart h1">♡</span>
           <span class="deco-heart h2">✦</span>
           <span class="deco-heart h3">☆</span>
@@ -165,7 +175,7 @@
       <div class="container about-grid">
         <div class="about-photo">
           <div class="photo-frame">
-            <img src="assets/hero_4.png" alt="关于憨宝宝" loading="lazy" />
+            <img src="assets/hero_4.jpg" alt="关于憨宝宝" loading="lazy" />
           </div>
           <div class="note-card">
             <p class="handwrite">今天也要元气满满呀～</p>
@@ -343,9 +353,9 @@
               </div>
             </div>
             <div class="tool-body tool-actions-col">
-              <button type="button" class="btn btn-ghost" data-quick-dl="assets/hero_1.png">下载主视觉</button>
+              <button type="button" class="btn btn-ghost" data-quick-dl="assets/hero_1.jpg">下载主视觉</button>
               <button type="button" class="btn btn-ghost" data-quick-dl="assets/douyin/avatar.jpg">下载头像</button>
-              <button type="button" class="btn btn-ghost" data-quick-dl="assets/hero_2.png">下载横幅图</button>
+              <button type="button" class="btn btn-ghost" data-quick-dl="assets/hero_2.jpg">下载横幅图</button>
               <a class="btn btn-outline" href="#assets">去素材下载区 →</a>
             </div>
           </article>
@@ -364,7 +374,7 @@
 
         <div class="campaign-panel glass">
           <div class="campaign-visual">
-            <img src="assets/hero_2.png" alt="当前应援活动" loading="lazy" />
+            <img src="assets/hero_2.jpg" alt="当前应援活动" loading="lazy" />
             <span class="badge-live">应援</span>
           </div>
           <div class="campaign-body">
@@ -519,7 +529,7 @@
           </div>
         </div>
         <div class="join-visual">
-          <img src="assets/hero_5.png" alt="加入憨家军" loading="lazy" />
+          <img src="assets/hero_5.jpg" alt="加入憨家军" loading="lazy" />
         </div>
       </div>
     </section>
@@ -580,7 +590,7 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=13" defer></script>
-  <script src="js/tools.js?v=13" defer></script>
+  <script src="js/main.js?v=14" defer></script>
+  <script src="js/tools.js?v=14" defer></script>
 </body>
 </html>

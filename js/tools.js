@@ -179,7 +179,18 @@
         resolve(img);
       };
       img.onerror = () => resolve(null);
-      img.src = "assets/douyin/avatar.jpg";
+      // 与页面同源相对路径，避免无尾斜杠时解析错目录
+      try {
+        const base = (function () {
+          let path = location.pathname || "/";
+          if (/\.[a-zA-Z0-9]+$/.test(path)) path = path.slice(0, path.lastIndexOf("/") + 1);
+          else if (!path.endsWith("/")) path += "/";
+          return location.origin + path;
+        })();
+        img.src = base + "assets/douyin/avatar.jpg";
+      } catch {
+        img.src = "assets/douyin/avatar.jpg";
+      }
     });
   }
 

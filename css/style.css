@@ -840,6 +840,21 @@ img[loading="lazy"] {
   content-visibility: auto;
 }
 
+img.img-broken {
+  min-height: 80px;
+  background: linear-gradient(145deg, var(--cream-pink), var(--lilac-bg));
+  object-fit: contain;
+  opacity: 0.85;
+}
+
+.work-cover,
+.asset-preview,
+.photo-frame,
+.campaign-visual,
+.join-visual {
+  background: linear-gradient(165deg, #ffe8f1 0%, #f0e8ff 100%);
+}
+
 /* ========== Buttons ========== */
 .btn {
   display: inline-flex;
