@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Poppins:wght@500;600;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=7" />
+  <link rel="stylesheet" href="css/style.css?v=8" />
 </head>
 <body>
   <div class="bg-glow" aria-hidden="true"></div>
@@ -17,16 +17,20 @@
 
   <!-- 纯静态部署说明（GitHub Pages） -->
   <div class="static-banner" id="staticBanner" role="note">
-    <strong>纯静态站点</strong>
-    · 任务 / 积分 / 祝福仅保存在你的浏览器。
-    主页数据来自公开抖音资料快照，非实时接口。
+    <span class="static-banner-pill">Tips</span>
+    <span class="static-banner-text">
+      <strong>纯静态站点</strong>
+      · 任务 / 积分 / 祝福仅保存在本机 · 抖音数据为公开快照
+    </span>
     <button type="button" class="static-banner-close" id="staticBannerClose" aria-label="关闭提示">×</button>
   </div>
 
   <!-- 顶部导航 -->
   <header class="top-nav" id="topNav">
     <a href="#home" class="logo">
-      <span class="logo-mark">♡</span>
+      <span class="logo-mark logo-mark-img" aria-hidden="true">
+        <img src="assets/douyin/avatar.jpg" alt="" width="36" height="36" />
+      </span>
       <span class="logo-text">憨宝宝的小宇宙</span>
     </a>
     <nav class="nav-links" aria-label="主导航">
@@ -59,22 +63,25 @@
           <span class="deco-heart h3">☆</span>
         </div>
         <div class="hero-copy">
-          <p class="eyebrow">HanBaby Fan Universe</p>
+          <p class="eyebrow">
+            <span class="eyebrow-dot" aria-hidden="true"></span>
+            HanBaby Fan Universe
+          </p>
           <h1>欢迎来到<br /><span class="accent">憨宝宝的小宇宙</span></h1>
           <p class="hero-sub">这里收藏她的每一次出现，也收藏我们一起走过的每一天。</p>
-          <p class="slogan">十万份喜欢，汇成一颗只为憨宝宝闪耀的星。</p>
+          <p class="slogan"><span class="slogan-star" aria-hidden="true">✦</span> 十万份喜欢，汇成一颗只为憨宝宝闪耀的星。</p>
           <div class="tag-row">
             <span class="tag">甜妹</span>
             <span class="tag">日常分享</span>
             <span class="tag">可爱反差</span>
             <span class="tag tag-gold">十万粉丝</span>
             <span class="tag">憨家军</span>
-            <span class="tag">抖音号 81183888747</span>
+            <span class="tag tag-id">抖音号 81183888747</span>
           </div>
           <div class="hero-actions">
             <a href="#support" class="btn btn-primary">进入应援中心</a>
             <a href="#works" class="btn btn-ghost">看看闪光瞬间</a>
-            <a id="douyinLinkHero" href="https://v.douyin.com/3Ed4QuQJTBA/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">打开抖音主页</a>
+            <a id="douyinLinkHero" href="https://v.douyin.com/3Ed4QuQJTBA/" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-douyin">打开抖音主页</a>
           </div>
         </div>
       </div>
@@ -453,7 +460,7 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=7"></script>
+  <script src="js/main.js?v=8"></script>
   <script>
     (function () {
       var btn = document.getElementById("staticBannerClose");
