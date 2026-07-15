@@ -1,0 +1,939 @@
+/* 憨宝宝的小宇宙 · 纯静态前端交互（GitHub Pages 兼容）
+ * 无后端：留言/任务/积分/祝福仅保存在当前浏览器 localStorage，不跨设备、不共享给他人。
+ */
+(function () {
+  "use strict";
+
+  const STORAGE = {
+    messages: "hanbaby_messages_v1",
+    tasks: "hanbaby_tasks_v1",
+    points: "hanbaby_points_v1",
+    joined: "hanbaby_joined_v1",
+    bless: "hanbaby_bless_count_v1",
+  };
+
+  /** 是否可用本地存储（隐私模式 / 禁用时降级） */
+  let storageOk = true;
+  try {
+    const k = "__hanbaby_probe__";
+    localStorage.setItem(k, "1");
+    localStorage.removeItem(k);
+  } catch {
+    storageOk = false;
+  }
+
+  /** 内存降级存储（localStorage 不可用时） */
+  const memStore = {};
+
+  const WORKS = [
+    {
+      id: 1,
+      title: "初次让大家记住她的视频",
+      desc: "那个眼神一抬，小宇宙就亮了。",
+      cover: "assets/emoji_1.png",
+      likes: "12.6万",
+      cat: "hot",
+      tag: "最高点赞",
+    },
+    {
+      id: 2,
+      title: "今日份可爱已送达",
+      desc: "日常分享，把温柔留给屏幕前的你。",
+      cover: "assets/emoji_2.png",
+      likes: "8.2万",
+      cat: "daily",
+      tag: "日常分享",
+    },
+    {
+      id: 3,
+      title: "憨宝宝的反差瞬间",
+      desc: "甜酷切换自如，真实又有趣。",
+      cover: "assets/emoji_3.png",
+      likes: "15.1万",
+      cat: "look",
+      tag: "颜值高光",
+    },
+    {
+      id: 4,
+      title: "最受粉丝喜欢的瞬间",
+      desc: "比心、眨眼，全是小惊喜。",
+      cover: "assets/hero_4.png",
+      likes: "18.0万",
+      cat: "hot",
+      tag: "粉丝最爱",
+    },
+    {
+      id: 5,
+      title: "十万粉丝前夜",
+      desc: "和憨家军一起熬过的那个夜晚。",
+      cover: "assets/hero_6.png",
+      likes: "9.4万",
+      cat: "grow",
+      tag: "成长记录",
+    },
+    {
+      id: 6,
+      title: "粉色蝴蝶结日",
+      desc: "校服感造型，手绘风氛围拉满。",
+      cover: "assets/hero_7.png",
+      likes: "7.8万",
+      cat: "look",
+      tag: "颜值高光",
+    },
+    {
+      id: 7,
+      title: "生活碎片小集合",
+      desc: "吃饭、出门、发呆，都是陪伴。",
+      cover: "assets/emoji_7.png",
+      likes: "6.1万",
+      cat: "daily",
+      tag: "日常分享",
+    },
+    {
+      id: 8,
+      title: "水手服高光时刻",
+      desc: "镜头前的她，像漫画里走出来的。",
+      cover: "assets/emoji_8.png",
+      likes: "11.3万",
+      cat: "look",
+      tag: "颜值高光",
+    },
+  ];
+
+  const TIMELINE = [
+    {
+      date: "起点",
+      title: "发布第一个作品",
+      story: "小宇宙的第一颗星，从此开始闪烁。",
+      img: "assets/emoji_1.png",
+    },
+    {
+      date: "里程碑",
+      title: "首次突破 1 万粉丝",
+      story: "原来认真生活，会被看见。",
+      img: "assets/emoji_2.png",
+    },
+    {
+      date: "高光",
+      title: "首条 10 万点赞作品",
+      story: "那条视频，让更多人记住了憨宝宝。",
+      img: "assets/emoji_3.png",
+      highlight: true,
+    },
+    {
+      date: "连接",
+      title: "首次直播 · 粉丝群成立",
+      story: "从单向关注，变成双向陪伴。",
+      img: "assets/emoji_7.png",
+    },
+    {
+      date: "跃升",
+      title: "突破 5 万粉丝",
+      story: "憨家军队伍越来越热闹了。",
+      img: "assets/emoji_9.png",
+    },
+    {
+      date: "纪念",
+      title: "突破 10 万粉丝",
+      story: "十万份喜欢，汇成一颗只为她闪耀的星。",
+      img: "assets/hero_1.png",
+      highlight: true,
+    },
+    {
+      date: "期待",
+      title: "第一次生日应援 & 下一站",
+      story: "故事未完，我们继续走下去。",
+      img: "assets/emoji_8.png",
+      highlight: true,
+    },
+  ];
+
+  const RANKS = [
+    { name: "星河小糖", score: 9860, badge: "星河陪伴官", avatar: "assets/emoji_1.png" },
+    { name: "粉紫日记", score: 8720, badge: "紫色守护者", avatar: "assets/emoji_2.png" },
+    { name: "憨家小北", score: 8010, badge: "憨家军成员", avatar: "assets/emoji_3.png" },
+    { name: "晚风与星", score: 7450, badge: "陪伴小爱心", avatar: "assets/emoji_7.png" },
+    { name: "奶油蝴蝶结", score: 6980, badge: "初见小星星", avatar: "assets/emoji_9.png" },
+  ];
+
+  const GALLERY = [
+    { title: "手绘头像 · Pink Day", author: "by 粉丝画手 A", img: "assets/emoji_1.png" },
+    { title: "比心瞬间", author: "by 应援海报组", img: "assets/hero_7.png" },
+    { title: "贝雷帽日常", author: "by 憨家军创作", img: "assets/hero_6.png" },
+    { title: "水手服纪念", author: "by 同人插画", img: "assets/emoji_8.png" },
+    { title: "挥手问候", author: "by 壁纸工坊", img: "assets/hero_2.png" },
+    { title: "主视觉收藏", author: "by 官方推荐风", img: "assets/hero_1.png" },
+  ];
+
+  const ASSETS = [
+    {
+      title: "官方主视觉插画",
+      meta: "PNG · 竖版 · 头像/海报",
+      img: "assets/hero_1.png",
+      file: "assets/hero_1.png",
+    },
+    {
+      title: "挥手欢迎图",
+      meta: "PNG · 横版 · 横幅/封面",
+      img: "assets/hero_2.png",
+      file: "assets/hero_2.png",
+    },
+    {
+      title: "比心高清立绘",
+      meta: "PNG · 正方形 · 群头像",
+      img: "assets/hero_4.png",
+      file: "assets/hero_4.png",
+    },
+    {
+      title: "表情包套装预览",
+      meta: "PNG · 9 张 · 聊天应援",
+      img: "assets/emoji_2.png",
+      file: "assets/emoji_2.png",
+    },
+    {
+      title: "手机壁纸素材",
+      meta: "PNG · 竖屏 · 壁纸",
+      img: "assets/hero_5.png",
+      file: "assets/hero_5.png",
+    },
+    {
+      title: "甜美特写",
+      meta: "PNG · 高清 · 灯牌/二创",
+      img: "assets/emoji_9.png",
+      file: "assets/emoji_9.png",
+    },
+  ];
+
+  const THANKS_LINES = [
+    "小星星已经飞向憨宝宝啦～",
+    "今日份可爱，已成功投递！",
+    "感谢你的陪伴，小宇宙又亮了一点点。",
+    "你的喜欢，是她继续前进的光。",
+    "理性应援，真心最闪亮 ✦",
+  ];
+
+  const DEFAULT_MESSAGES = [
+    {
+      nickname: "初见小星",
+      city: "长沙",
+      content: "第一次刷到你是在推荐页。想对你说：谢谢你把日常过成光。",
+      time: "2026-06-01",
+    },
+    {
+      nickname: "粉紫奶盖",
+      city: "广州",
+      content: "最喜欢你的反差可爱。希望以后可以陪你走到下一个十万。",
+      time: "2026-06-12",
+    },
+    {
+      nickname: "憨家军一号",
+      city: "上海",
+      content: "十万粉丝快乐！每一份喜欢都值得被认真对待。",
+      time: "2026-07-01",
+    },
+  ];
+
+  /* ---------- Utils ---------- */
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+
+  function storageGet(key) {
+    try {
+      if (storageOk) return localStorage.getItem(key);
+    } catch {
+      /* ignore */
+    }
+    return Object.prototype.hasOwnProperty.call(memStore, key) ? memStore[key] : null;
+  }
+
+  function storageSet(key, value) {
+    try {
+      if (storageOk) {
+        localStorage.setItem(key, value);
+        return true;
+      }
+    } catch {
+      storageOk = false;
+    }
+    memStore[key] = value;
+    return false;
+  }
+
+  function loadJSON(key, fallback) {
+    try {
+      const raw = storageGet(key);
+      return raw ? JSON.parse(raw) : fallback;
+    } catch {
+      return fallback;
+    }
+  }
+
+  function saveJSON(key, value) {
+    storageSet(key, JSON.stringify(value));
+  }
+
+  function todayKey() {
+    const d = new Date();
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${y}-${m}-${day}`;
+  }
+
+  function formatNum(n) {
+    return Number(n).toLocaleString("zh-CN");
+  }
+
+  function toast(msg) {
+    const el = $("#toast");
+    if (!el) return;
+    el.textContent = msg;
+    el.classList.add("show");
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => el.classList.remove("show"), 2400);
+  }
+
+  function assetUrl(path) {
+    // 相对路径，兼容 GitHub Pages 子路径仓库
+    try {
+      return new URL(path, window.location.href).href;
+    } catch {
+      return path;
+    }
+  }
+
+  async function downloadAsset(path, filename) {
+    const name = filename || path.split("/").pop() || "hanbaby-asset.png";
+    try {
+      const res = await fetch(assetUrl(path));
+      if (!res.ok) throw new Error("fetch failed");
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = name;
+      a.rel = "noopener";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1500);
+      toast("开始下载：" + name);
+      return;
+    } catch {
+      // 降级：新标签打开图片，用户可长按/右键保存
+      window.open(assetUrl(path), "_blank", "noopener,noreferrer");
+      toast("已打开素材，可右键/长按保存图片");
+    }
+  }
+
+  async function shareSite() {
+    const shareData = {
+      title: "憨宝宝的小宇宙",
+      text: "十万份喜欢，汇成一颗只为憨宝宝闪耀的星。",
+      url: window.location.href.split("#")[0],
+    };
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+        return true;
+      }
+    } catch (err) {
+      if (err && err.name === "AbortError") return false;
+    }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(shareData.url);
+        toast("链接已复制，去发给朋友吧～");
+        return true;
+      }
+    } catch {
+      /* ignore */
+    }
+    // 最终降级：选中提示
+    window.prompt("复制此链接分享给朋友：", shareData.url);
+    return true;
+  }
+
+  function openModal(text) {
+    const modal = $("#thanksModal");
+    const p = $("#modalText");
+    if (p) p.textContent = text || THANKS_LINES[Math.floor(Math.random() * THANKS_LINES.length)];
+    if (modal) modal.hidden = false;
+  }
+
+  function closeModal() {
+    const modal = $("#thanksModal");
+    if (modal) modal.hidden = true;
+  }
+
+  /* ---------- Floating particles ---------- */
+  function initFloatLayer() {
+    const layer = $("#floatLayer");
+    if (!layer) return;
+    const chars = ["♡", "✦", "☆", "·", "✧"];
+    for (let i = 0; i < 18; i++) {
+      const s = document.createElement("span");
+      s.className = "float-particle";
+      s.textContent = chars[i % chars.length];
+      s.style.left = Math.random() * 100 + "%";
+      s.style.top = Math.random() * 100 + "%";
+      s.style.animationDuration = 4 + Math.random() * 6 + "s";
+      s.style.animationDelay = Math.random() * 3 + "s";
+      s.style.fontSize = 10 + Math.random() * 14 + "px";
+      s.style.color = i % 2 ? "#FFB7D5" : "#CBB8FF";
+      layer.appendChild(s);
+    }
+  }
+
+  /* ---------- Count up ---------- */
+  function animateCount(el) {
+    const target = Number(el.dataset.count || 0);
+    const suffix = el.dataset.suffix || "";
+    const duration = 1600;
+    const start = performance.now();
+
+    function frame(now) {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const val = Math.floor(target * eased);
+      el.textContent = formatNum(val) + suffix;
+      if (t < 1) requestAnimationFrame(frame);
+      else el.textContent = formatNum(target) + suffix;
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function initStatsObserver() {
+    const nums = $$(".stat-num");
+    if (!nums.length) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            animateCount(e.target);
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    nums.forEach((n) => io.observe(n));
+  }
+
+  /* ---------- Works ---------- */
+  function renderWorks(filter = "all") {
+    const grid = $("#worksGrid");
+    if (!grid) return;
+    const list = filter === "all" ? WORKS : WORKS.filter((w) => w.cat === filter);
+    grid.innerHTML = list
+      .map(
+        (w) => `
+      <article class="work-card reveal" data-cat="${w.cat}">
+        <div class="work-cover">
+          <img src="${w.cover}" alt="${w.title}" loading="lazy" />
+          <span class="work-badge">${w.tag}</span>
+          <span class="work-likes">♡ ${w.likes}</span>
+        </div>
+        <div class="work-body">
+          <h3>${w.title}</h3>
+          <p>${w.desc}</p>
+        </div>
+      </article>`
+      )
+      .join("");
+    observeReveals(grid);
+  }
+
+  function initWorkFilters() {
+    $$(".filter-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        $$(".filter-btn").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderWorks(btn.dataset.filter || "all");
+      });
+    });
+  }
+
+  /* ---------- Timeline ---------- */
+  function renderTimeline() {
+    const track = $("#timelineTrack");
+    if (!track) return;
+    track.innerHTML = TIMELINE.map(
+      (t) => `
+      <article class="tl-item ${t.highlight ? "highlight" : ""}">
+        <div class="tl-card">
+          <p class="tl-date">${t.date}</p>
+          <h3>${t.title}</h3>
+          <p>${t.story}</p>
+          <img class="tl-thumb" src="${t.img}" alt="" loading="lazy" />
+        </div>
+      </article>`
+    ).join("");
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("visible");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+    $$(".tl-item", track).forEach((el) => io.observe(el));
+  }
+
+  /* ---------- Rank ---------- */
+  function renderRank() {
+    const list = $("#rankList");
+    if (!list) return;
+    list.innerHTML = RANKS.map(
+      (r, i) => `
+      <li class="rank-item ${i < 3 ? "top" : ""}">
+        <span class="rank-num">${i + 1}</span>
+        <img class="rank-avatar" src="${r.avatar}" alt="" loading="lazy" />
+        <div>
+          <div class="name">${r.name}</div>
+          <div class="badge">${r.badge}</div>
+        </div>
+        <span class="score">${formatNum(r.score)} ♡</span>
+      </li>`
+    ).join("");
+  }
+
+  /* ---------- Gallery & Assets ---------- */
+  function renderGallery() {
+    const grid = $("#galleryGrid");
+    if (!grid) return;
+    grid.innerHTML = GALLERY.map(
+      (g) => `
+      <article class="gallery-card reveal">
+        <img src="${g.img}" alt="${g.title}" loading="lazy" />
+        <div class="gallery-meta">
+          <h3>${g.title}</h3>
+          <p class="author">${g.author}</p>
+        </div>
+      </article>`
+    ).join("");
+    observeReveals(grid);
+  }
+
+  function renderAssets() {
+    const grid = $("#assetGrid");
+    if (!grid) return;
+    grid.innerHTML = ASSETS.map(
+      (a, i) => `
+      <article class="asset-card reveal">
+        <div class="asset-preview">
+          <img src="${a.img}" alt="${a.title}" loading="lazy" />
+        </div>
+        <h3>${a.title}</h3>
+        <p class="meta">${a.meta}</p>
+        <button type="button" class="btn btn-sm" data-dl="${i}">下载素材</button>
+      </article>`
+    ).join("");
+    grid.querySelectorAll("[data-dl]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const a = ASSETS[Number(btn.getAttribute("data-dl"))];
+        if (!a) return;
+        const name = (a.file || a.img).split("/").pop();
+        downloadAsset(a.file || a.img, name);
+      });
+    });
+    observeReveals(grid);
+  }
+
+  /* ---------- Messages ---------- */
+  function getMessages() {
+    const saved = loadJSON(STORAGE.messages, null);
+    if (!saved || !saved.length) {
+      saveJSON(STORAGE.messages, DEFAULT_MESSAGES);
+      return [...DEFAULT_MESSAGES];
+    }
+    return saved;
+  }
+
+  function storageHintText() {
+    if (!storageOk) {
+      return "当前环境无法长期保存数据，刷新后可能丢失（纯静态演示）。";
+    }
+    return "留言仅保存在本机浏览器，不会上传到服务器，其他人看不到。";
+  }
+
+  function renderMessageCards(messages) {
+    const box = $("#messageCards");
+    if (!box) return;
+    const list = [...messages].reverse();
+    if (!list.length) {
+      box.innerHTML = `<p class="empty-hint">这里还没有星星，成为第一个给憨宝宝留言的人吧。</p>`;
+      return;
+    }
+    box.innerHTML = list
+      .map(
+        (m) => `
+      <article class="msg-card">
+        <div class="who">${escapeHtml(m.nickname)}${m.city ? ` <span class="city">· ${escapeHtml(m.city)}</span>` : ""}</div>
+        <p class="body">${escapeHtml(m.content)}</p>
+        <p class="time">${escapeHtml(m.time || "")}</p>
+      </article>`
+      )
+      .join("");
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function placeStars(messages) {
+    const stage = $("#planetStage");
+    if (!stage) return;
+    $$(".star-msg", stage).forEach((el) => el.remove());
+
+    const count = Math.min(messages.length, 24);
+    for (let i = 0; i < count; i++) {
+      const m = messages[messages.length - 1 - i];
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "star-msg";
+      btn.title = m.nickname + "：" + m.content.slice(0, 20);
+      const angle = (i / count) * Math.PI * 2 + (i % 3) * 0.2;
+      const r = 28 + (i % 5) * 8;
+      const x = 50 + Math.cos(angle) * r;
+      const y = 50 + Math.sin(angle) * (r * 0.75);
+      btn.style.left = `calc(${x}% - 14px)`;
+      btn.style.top = `calc(${y}% - 14px)`;
+      btn.style.animationDelay = (i * 0.12) + "s";
+      btn.addEventListener("click", () => {
+        openModal(`${m.nickname}${m.city ? " · " + m.city : ""}：${m.content}`);
+      });
+      stage.appendChild(btn);
+    }
+  }
+
+  function initMessages() {
+    const messages = getMessages();
+    renderMessageCards(messages);
+    placeStars(messages);
+
+    const staticNote = $("#staticMsgNote");
+    if (staticNote) staticNote.textContent = storageHintText();
+
+    const form = $("#messageForm");
+    if (!form) return;
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      let nickname = String(fd.get("nickname") || "").trim();
+      const city = String(fd.get("city") || "").trim();
+      const content = String(fd.get("content") || "").trim();
+      const anonymous = fd.get("anonymous") === "on";
+
+      if (!content || content.length < 2) {
+        toast("写一句真心话再发射吧～");
+        return;
+      }
+      if (anonymous) nickname = "匿名小星星";
+      if (!nickname) nickname = "路过的粉丝";
+
+      // 轻量敏感词
+      const bad = /(微信|加我|http|www\.|赌博|色情)/i;
+      if (bad.test(content) || bad.test(nickname)) {
+        toast("内容含有不适宜信息，请修改后再试");
+        return;
+      }
+
+      const list = getMessages();
+      list.push({
+        nickname: nickname.slice(0, 16),
+        city: city.slice(0, 20),
+        content: content.slice(0, 200),
+        time: new Date().toLocaleDateString("zh-CN"),
+      });
+      saveJSON(STORAGE.messages, list);
+      renderMessageCards(list);
+      placeStars(list);
+      form.reset();
+      const hint = $("#formHint");
+      if (hint) {
+        hint.textContent = storageOk
+          ? "小星星已点亮（仅本机可见）"
+          : "已点亮（当前无法持久保存）";
+      }
+      openModal(
+        storageOk
+          ? "你的祝福已成为本机小宇宙里的一颗星（纯静态站，不会同步到云端）。"
+          : "祝福已展示。注意：当前浏览器无法保存，刷新后可能消失。"
+      );
+      addPoints(5, 10);
+    });
+  }
+
+  /* ---------- Tasks & Points ---------- */
+  function getPoints() {
+    return loadJSON(STORAGE.points, { heart: 0, support: 0 });
+  }
+
+  function setPoints(p) {
+    saveJSON(STORAGE.points, p);
+    const h = $("#heartPoints");
+    const s = $("#supportPoints");
+    if (h) h.textContent = p.heart;
+    if (s) s.textContent = p.support;
+  }
+
+  function addPoints(heart, support) {
+    const p = getPoints();
+    p.heart += heart;
+    p.support += support;
+    setPoints(p);
+  }
+
+  function getTasksState() {
+    const all = loadJSON(STORAGE.tasks, {});
+    const day = todayKey();
+    if (!all[day]) all[day] = {};
+    return { all, day, done: all[day] };
+  }
+
+  function initTasks() {
+    setPoints(getPoints());
+    const { all, day, done } = getTasksState();
+    const items = $$(".task-item");
+
+    function refreshDoneCount() {
+      const n = Object.keys(done).filter((k) => done[k]).length;
+      const el = $("#taskDone");
+      if (el) el.textContent = `${n}/5`;
+    }
+
+    items.forEach((item) => {
+      const key = item.dataset.task;
+      const btn = $("[data-complete]", item);
+      if (done[key]) {
+        item.classList.add("done");
+        if (btn) btn.textContent = "已完成";
+      }
+      if (!btn) return;
+      btn.addEventListener("click", async () => {
+        if (done[key]) return;
+
+        // 分享任务：先尝试真正分享/复制链接（纯静态可实现）
+        if (key === "share") {
+          const ok = await shareSite();
+          if (!ok) {
+            toast("取消分享也可以明天再来～");
+            return;
+          }
+        }
+
+        // 观看任务：打开占位说明（无真实抖音 API，纯静态无法拉取作品）
+        if (key === "watch") {
+          openModal("纯静态站点无法嵌入实时抖音作品。请到抖音搜索「憨宝宝」观看后，再回来点完成即可～");
+        }
+
+        done[key] = true;
+        all[day] = done;
+        saveJSON(STORAGE.tasks, all);
+        item.classList.add("done");
+        btn.textContent = "已完成";
+        addPoints(8, 15);
+        refreshDoneCount();
+        if (key !== "watch") {
+          openModal(THANKS_LINES[Math.floor(Math.random() * THANKS_LINES.length)]);
+        }
+        toast("任务完成，爱心值 +8（本机记录）");
+      });
+    });
+    refreshDoneCount();
+  }
+
+  /* ---------- Campaign bless ---------- */
+  function initCampaign() {
+    const base = 8260;
+    let bless = Number(storageGet(STORAGE.bless) || base);
+    if (!Number.isFinite(bless) || bless < base) bless = base;
+    const target = 10000;
+    const pctEl = $("#progressPct");
+    const fill = $("#progressFill");
+    const countEl = $("#blessCount");
+    const bar = $(".progress-bar");
+    const note = $("#campaignStaticNote");
+    if (note) {
+      note.textContent = "演示进度：纯静态站无法全网统计，数字保存在你的浏览器里。";
+    }
+
+    function updateUI() {
+      const pct = Math.min(100, Math.round((bless / target) * 100));
+      if (pctEl) pctEl.textContent = pct + "%";
+      if (fill) fill.style.width = pct + "%";
+      if (countEl) countEl.textContent = formatNum(bless);
+      if (bar) bar.setAttribute("aria-valuenow", String(pct));
+    }
+    updateUI();
+
+    const btn = $("#joinCampaignBtn");
+    if (!btn) return;
+    btn.addEventListener("click", () => {
+      const key = "hanbaby_blessed_" + todayKey();
+      if (storageGet(key)) {
+        toast("今天已经送过祝福啦，明天再来～");
+        return;
+      }
+      bless = Math.min(target, bless + 1);
+      storageSet(STORAGE.bless, String(bless));
+      storageSet(key, "1");
+      updateUI();
+      addPoints(12, 20);
+      openModal("生日祝福 +1（本机记录）！纯静态站不会同步到全站总榜。");
+    });
+  }
+
+  /* ---------- Join ---------- */
+  function initJoin() {
+    const btn = $("#joinBtn");
+    if (!btn) return;
+    if (storageGet(STORAGE.joined)) {
+      btn.textContent = "你已是憨家军成员";
+      btn.disabled = true;
+      btn.style.opacity = "0.7";
+    }
+    btn.addEventListener("click", () => {
+      storageSet(STORAGE.joined, "1");
+      storageSet("hanbaby_nickname_v1", "憨家军游客");
+      btn.textContent = "你已是憨家军成员";
+      btn.disabled = true;
+      addPoints(20, 30);
+      openModal("欢迎加入憨家军！等级：Lv.1 初见小星星（游客模式 · 本机记录，无账号登录）");
+    });
+  }
+
+  function initStaticBanner() {
+    const el = $("#staticBanner");
+    if (!el) return;
+    try {
+      if (sessionStorage.getItem("hanbaby_banner_closed") === "1" && storageOk) {
+        el.hidden = true;
+        return;
+      }
+    } catch {
+      /* ignore */
+    }
+    if (!storageOk) {
+      el.hidden = false;
+      el.classList.add("warn");
+      el.innerHTML =
+        "<strong>存储受限</strong>：当前浏览器无法使用 localStorage，交互数据刷新后可能丢失。" +
+        '<button type="button" class="static-banner-close" id="staticBannerClose" aria-label="关闭提示">×</button>';
+      $("#staticBannerClose")?.addEventListener("click", () => {
+        el.hidden = true;
+      });
+    }
+  }
+
+  /* ---------- Nav / Scroll ---------- */
+  function initNav() {
+    const topNav = $("#topNav");
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (topNav) topNav.classList.toggle("scrolled", window.scrollY > 20);
+        updateBottomNav();
+      },
+      { passive: true }
+    );
+
+    $$(".bottom-nav a, .nav-links a, .logo, .nav-cta").forEach((a) => {
+      a.addEventListener("click", () => {
+        // active state after jump
+        setTimeout(updateBottomNav, 100);
+      });
+    });
+  }
+
+  function updateBottomNav() {
+    const sections = ["home", "works", "support", "messages", "join"];
+    let current = "home";
+    const y = window.scrollY + 120;
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el && el.offsetTop <= y) current = id;
+    });
+    $$(".bn-item").forEach((a) => {
+      a.classList.toggle("active", a.dataset.nav === current);
+    });
+  }
+
+  /* ---------- Reveal ---------- */
+  function observeReveals(root = document) {
+    const els = $$(".reveal", root);
+    if (!els.length) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("visible");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    els.forEach((el) => io.observe(el));
+  }
+
+  /* ---------- Parallax (light) ---------- */
+  function initParallax() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+    const visual = $(".hero-visual");
+    if (!visual) return;
+    document.addEventListener("mousemove", (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 12;
+      const y = (e.clientY / window.innerHeight - 0.5) * 12;
+      visual.style.transform = `translate(${x}px, ${y}px)`;
+    });
+  }
+
+  /* ---------- Modal controls ---------- */
+  function initModal() {
+    $("#modalClose")?.addEventListener("click", closeModal);
+    $("#modalOk")?.addEventListener("click", closeModal);
+    $("#thanksModal")?.addEventListener("click", (e) => {
+      if (e.target.id === "thanksModal") closeModal();
+    });
+  }
+
+  /* ---------- Boot ---------- */
+  function boot() {
+    initStaticBanner();
+    initFloatLayer();
+    initStatsObserver();
+    renderWorks("all");
+    initWorkFilters();
+    renderTimeline();
+    renderRank();
+    renderGallery();
+    renderAssets();
+    initMessages();
+    initTasks();
+    initCampaign();
+    initJoin();
+    initNav();
+    initModal();
+    initParallax();
+    observeReveals();
+    updateBottomNav();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
+})();

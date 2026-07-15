@@ -1,0 +1,19 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+.idea/
+.vscode/
+*.log
+
+# Local tooling
+node_modules/
+.cache/
+dist/
+
+# 根目录重复/草稿素材（站点只用 assets/）
+/emoji_*.png
+/ChatGPT_Image_*.png
+/*.psd
+/*.ai

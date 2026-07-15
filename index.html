@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="憨宝宝的小宇宙 — 十万份喜欢，汇成一颗只为憨宝宝闪耀的星。官方粉丝应援站。" />
+  <meta name="theme-color" content="#FFB7D5" />
+  <title>憨宝宝的小宇宙 | HanBaby Fan Universe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Poppins:wght@500;600;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=4" />
+</head>
+<body>
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="float-layer" id="floatLayer" aria-hidden="true"></div>
+
+  <!-- 纯静态部署说明（GitHub Pages） -->
+  <div class="static-banner" id="staticBanner" role="note">
+    <strong>纯静态站点</strong>
+    · 留言 / 任务 / 积分 / 祝福仅保存在你的浏览器，不会同步到服务器，其他访客看不到。
+    排行榜与进度为演示数据。
+    <button type="button" class="static-banner-close" id="staticBannerClose" aria-label="关闭提示">×</button>
+  </div>
+
+  <!-- 顶部导航 -->
+  <header class="top-nav" id="topNav">
+    <a href="#home" class="logo">
+      <span class="logo-mark">♡</span>
+      <span class="logo-text">憨宝宝的小宇宙</span>
+    </a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="#home">首页</a>
+      <a href="#about">关于</a>
+      <a href="#works">作品</a>
+      <a href="#support">应援</a>
+      <a href="#timeline">轨迹</a>
+      <a href="#messages">留言</a>
+      <a href="#create">共创</a>
+      <a href="#assets">素材</a>
+      <a href="#join">加入</a>
+    </nav>
+    <a class="nav-cta" href="#support">进入应援</a>
+  </header>
+
+  <main>
+    <!-- 8.1 Hero -->
+    <section class="hero" id="home">
+      <div class="hero-inner">
+        <div class="hero-visual" data-parallax>
+          <div class="polaroid">
+            <div class="polaroid-tape"></div>
+            <img src="assets/hero_1.png" alt="憨宝宝主视觉" class="hero-img" width="1122" height="1402" />
+            <p class="polaroid-caption">HanBaby · 今日份可爱</p>
+          </div>
+          <img src="assets/emoji_2.png" alt="" class="deco-sticker s1" aria-hidden="true" />
+          <img src="assets/emoji_3.png" alt="" class="deco-sticker s2" aria-hidden="true" />
+          <span class="deco-heart h1">♡</span>
+          <span class="deco-heart h2">✦</span>
+          <span class="deco-heart h3">☆</span>
+        </div>
+        <div class="hero-copy">
+          <p class="eyebrow">HanBaby Fan Universe</p>
+          <h1>欢迎来到<br /><span class="accent">憨宝宝的小宇宙</span></h1>
+          <p class="hero-sub">这里收藏她的每一次出现，也收藏我们一起走过的每一天。</p>
+          <p class="slogan">十万份喜欢，汇成一颗只为憨宝宝闪耀的星。</p>
+          <div class="tag-row">
+            <span class="tag">甜妹</span>
+            <span class="tag">日常分享</span>
+            <span class="tag">可爱反差</span>
+            <span class="tag tag-gold">十万粉丝</span>
+            <span class="tag">憨家军</span>
+          </div>
+          <div class="hero-actions">
+            <a href="#support" class="btn btn-primary">进入应援中心</a>
+            <a href="#works" class="btn btn-ghost">观看代表作品</a>
+            <a href="https://www.douyin.com/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">前往抖音主页</a>
+          </div>
+        </div>
+      </div>
+      <a href="#stats" class="scroll-hint" aria-label="向下滚动">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- 8.2 十万粉丝纪念 -->
+    <section class="section stats" id="stats">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">100,000 Hearts for HanBaby</p>
+          <h2>十万份喜欢，感谢相遇</h2>
+          <p class="section-desc">从第一个关注，到十万份喜欢。每一个数字背后，都是一次真诚的停留。</p>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-card glass">
+            <span class="stat-icon">♡</span>
+            <strong class="stat-num" data-count="100000" data-suffix="+">0</strong>
+            <span class="stat-label">粉丝数</span>
+          </article>
+          <article class="stat-card glass">
+            <span class="stat-icon">★</span>
+            <strong class="stat-num" data-count="1500000" data-suffix="+">0</strong>
+            <span class="stat-label">累计获赞</span>
+          </article>
+          <article class="stat-card glass">
+            <span class="stat-icon">✦</span>
+            <strong class="stat-num" data-count="79" data-suffix="+">0</strong>
+            <span class="stat-label">作品数量</span>
+          </article>
+          <article class="stat-card glass">
+            <span class="stat-icon">☀</span>
+            <strong class="stat-num" data-count="365" data-suffix="+">0</strong>
+            <span class="stat-label">陪伴天数</span>
+          </article>
+          <article class="stat-card glass">
+            <span class="stat-icon">✎</span>
+            <strong class="stat-num" data-count="8260" data-suffix="">0</strong>
+            <span class="stat-label">粉丝祝福</span>
+          </article>
+          <article class="stat-card glass">
+            <span class="stat-icon">◎</span>
+            <strong class="stat-num" data-count="12800" data-suffix="+">0</strong>
+            <span class="stat-label">应援参与</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8.3 关于憨宝宝 -->
+    <section class="section about" id="about">
+      <div class="container about-grid">
+        <div class="about-photo">
+          <div class="photo-frame">
+            <img src="assets/hero_4.png" alt="关于憨宝宝" loading="lazy" />
+          </div>
+          <div class="note-card">
+            <p class="handwrite">今天也要元气满满呀～</p>
+            <span class="note-tape"></span>
+          </div>
+        </div>
+        <div class="about-content">
+          <p class="eyebrow">About HanBaby</p>
+          <h2>关于憨宝宝</h2>
+          <p class="lead">
+            她是镜头前有一点害羞、有一点可爱，也有很多真诚的憨宝宝。
+            她用日常、情绪和生活碎片，陪伴越来越多的人。
+            这里不只记录她的成长，也记录每一位粉丝与她相遇的瞬间。
+          </p>
+          <ul class="info-list">
+            <li><span>昵称</span><strong>憨宝宝</strong></li>
+            <li><span>平台</span><strong>抖音</strong></li>
+            <li><span>粉丝</span><strong>10 万+</strong></li>
+            <li><span>内容</span><strong>日常分享 · 生活记录 · 可爱互动</strong></li>
+            <li><span>地区</span><strong>湖南</strong></li>
+            <li><span>粉丝称呼</span><strong>憨家军</strong></li>
+          </ul>
+          <div class="trait-row">
+            <span>黑色长发</span>
+            <span>清透妆感</span>
+            <span>甜酷气质</span>
+            <span>真实自然</span>
+          </div>
+          <blockquote class="quote">
+            「愿每一次打开，都能碰到一点温柔。」
+            <cite>— 主播寄语</cite>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8.4 精选作品 -->
+    <section class="section works" id="works">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Featured Moments</p>
+          <h2>憨宝宝的闪光瞬间</h2>
+          <p class="section-desc">最高点赞、日常分享、颜值高光与成长记录，收藏那些让人会心一笑的瞬间。</p>
+        </div>
+        <div class="filter-tabs" role="tablist">
+          <button class="filter-btn active" data-filter="all">全部</button>
+          <button class="filter-btn" data-filter="hot">最高点赞</button>
+          <button class="filter-btn" data-filter="daily">日常分享</button>
+          <button class="filter-btn" data-filter="look">颜值高光</button>
+          <button class="filter-btn" data-filter="grow">成长记录</button>
+        </div>
+        <div class="works-grid" id="worksGrid">
+          <!-- filled by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 应援中心 -->
+    <section class="section support" id="support">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Support Center</p>
+          <h2>应援中心</h2>
+          <p class="section-desc">理性、真实、自愿参与。每一份喜欢都同样珍贵。</p>
+        </div>
+
+        <div class="campaign-panel glass">
+          <div class="campaign-visual">
+            <img src="assets/hero_2.png" alt="当前应援活动" loading="lazy" />
+            <span class="badge-live">演示</span>
+          </div>
+          <div class="campaign-body">
+            <h3>十万粉丝纪念 · 生日祝福收集</h3>
+            <p>为憨宝宝集齐 10,000 份真心祝福，点亮小宇宙里的纪念星河。</p>
+            <p class="static-inline-note" id="campaignStaticNote"></p>
+            <div class="progress-wrap">
+              <div class="progress-meta">
+                <span>生日祝福收集</span>
+                <strong id="progressPct">82%</strong>
+              </div>
+              <div class="progress-bar" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-fill" id="progressFill" style="width: 82%"></div>
+              </div>
+              <div class="progress-meta sub">
+                <span>已收集 <b id="blessCount">8,260</b> 份祝福</span>
+                <span>目标 10,000 份</span>
+              </div>
+            </div>
+            <div class="campaign-meta">
+              <span>参与人数 12,800+</span>
+              <span>剩余 18 天</span>
+            </div>
+            <button class="btn btn-primary" id="joinCampaignBtn">立即送出祝福</button>
+          </div>
+        </div>
+
+        <div class="tasks-board">
+          <h3 class="sub-title">每日应援任务</h3>
+          <p class="hint">完成任务可获得爱心值与应援积分（仅本机浏览器记录 · 无账号）</p>
+          <ul class="task-list" id="taskList">
+            <li class="task-item" data-task="watch">
+              <span class="task-icon">▶</span>
+              <div>
+                <strong>观看最新作品</strong>
+                <p>去抖音刷一刷今日份可爱</p>
+              </div>
+              <button class="btn btn-sm" data-complete>完成</button>
+            </li>
+            <li class="task-item" data-task="like">
+              <span class="task-icon">♡</span>
+              <div>
+                <strong>点赞与收藏</strong>
+                <p>把喜欢留在作品里</p>
+              </div>
+              <button class="btn btn-sm" data-complete>完成</button>
+            </li>
+            <li class="task-item" data-task="comment">
+              <span class="task-icon">✎</span>
+              <div>
+                <strong>发布正向评论</strong>
+                <p>说一句真心话就好</p>
+              </div>
+              <button class="btn btn-sm" data-complete>完成</button>
+            </li>
+            <li class="task-item" data-task="checkin">
+              <span class="task-icon">★</span>
+              <div>
+                <strong>每日签到</strong>
+                <p>来小宇宙打个卡</p>
+              </div>
+              <button class="btn btn-sm" data-complete>签到</button>
+            </li>
+            <li class="task-item" data-task="share">
+              <span class="task-icon">↗</span>
+              <div>
+                <strong>分享给朋友</strong>
+                <p>邀请新伙伴加入憨家军</p>
+              </div>
+              <button class="btn btn-sm" data-complete>完成</button>
+            </li>
+          </ul>
+          <div class="points-bar glass">
+            <div>
+              <span class="label">我的爱心值</span>
+              <strong id="heartPoints">0</strong>
+            </div>
+            <div>
+              <span class="label">应援积分</span>
+              <strong id="supportPoints">0</strong>
+            </div>
+            <div>
+              <span class="label">今日完成</span>
+              <strong id="taskDone">0/5</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="rank-board">
+          <h3 class="sub-title">本周应援纪念榜</h3>
+          <p class="hint">演示榜单（写死在前端）。纯静态站无法做全站实时排行；每一份喜欢都同样珍贵。</p>
+          <ol class="rank-list" id="rankList"></ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8.5 成长轨迹 -->
+    <section class="section timeline" id="timeline">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Our Journey</p>
+          <h2>我们一起走过的路</h2>
+          <p class="section-desc">这不是冰冷的数字增长记录，而是一段属于憨宝宝和所有粉丝的共同记忆。</p>
+        </div>
+        <div class="timeline-track" id="timelineTrack">
+          <!-- filled by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 粉丝留言墙 -->
+    <section class="section messages" id="messages">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Star Message Wall</p>
+          <h2>星球留言墙</h2>
+          <p class="section-desc">每一条留言是一颗小星星，点击后展开祝福内容。</p>
+          <p class="static-inline-note" id="staticMsgNote">留言仅保存在本机浏览器，不会上传，其他访客看不到。</p>
+        </div>
+
+        <div class="planet-stage" id="planetStage">
+          <div class="planet-core">
+            <img src="assets/emoji_1.png" alt="留言星球" />
+            <span>点亮一颗星</span>
+          </div>
+          <!-- stars injected -->
+        </div>
+
+        <form class="message-form glass" id="messageForm">
+          <h3>写下一句想对她说的话</h3>
+          <p class="static-inline-note">纯静态演示 · 提交后只写进你的浏览器 localStorage</p>
+          <div class="form-row">
+            <label>
+              昵称
+              <input type="text" name="nickname" maxlength="16" placeholder="你的昵称" required />
+            </label>
+            <label>
+              城市 <small>（可选）</small>
+              <input type="text" name="city" maxlength="20" placeholder="来自哪里" />
+            </label>
+          </div>
+          <label>
+            祝福内容
+            <textarea name="content" rows="3" maxlength="200" placeholder="第一次刷到你是在…… 我最喜欢你的…… 想对你说……" required></textarea>
+          </label>
+          <label class="check-inline">
+            <input type="checkbox" name="anonymous" />
+            匿名发布
+          </label>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">发射小星星</button>
+            <span class="form-hint" id="formHint"></span>
+          </div>
+        </form>
+
+        <div class="message-cards" id="messageCards"></div>
+      </div>
+    </section>
+
+    <!-- 11 粉丝共创 -->
+    <section class="section create" id="create">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Fan Creation Gallery</p>
+          <h2>憨家军创作馆</h2>
+          <p class="section-desc">绘画、海报、表情包、壁纸……把喜欢变成作品，挂进小宇宙画廊。</p>
+        </div>
+        <div class="gallery-grid" id="galleryGrid"></div>
+        <p class="empty-hint">投稿需后端/表单服务，纯静态站暂不支持上传 · 当前为展示示例</p>
+      </div>
+    </section>
+
+    <!-- 12 素材下载 -->
+    <section class="section assets-sec" id="assets">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Support Assets</p>
+          <h2>应援素材下载</h2>
+          <p class="section-desc">统一视觉规范的应援资源。禁止商业售卖、冒充官方或恶意丑化。</p>
+        </div>
+        <div class="asset-grid" id="assetGrid"></div>
+        <div class="rules glass">
+          <h4>使用规范</h4>
+          <ul>
+            <li>禁止恶意丑化、商业售卖、冒充官方</li>
+            <li>禁止泄露主播隐私</li>
+            <li>二创需注明来源；商业合作需单独授权</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 加入憨家军 -->
+    <section class="section join" id="join">
+      <div class="container join-panel glass">
+        <div class="join-copy">
+          <p class="eyebrow">Join the Fan Army</p>
+          <h2>加入憨家军</h2>
+          <p>成为小宇宙的一员，一起陪伴、一起应援、一起记录。<span class="static-inline-note" style="display:inline">（游客模式 · 无真实登录）</span></p>
+          <ul class="level-list">
+            <li><b>Lv.1</b> 初见小星星</li>
+            <li><b>Lv.2</b> 陪伴小爱心</li>
+            <li><b>Lv.3</b> 憨家军成员</li>
+            <li><b>Lv.4</b> 紫色守护者</li>
+            <li><b>Lv.5</b> 星河陪伴官</li>
+            <li><b>Lv.6</b> 永久纪念粉</li>
+          </ul>
+          <div class="hero-actions">
+            <button class="btn btn-primary" id="joinBtn">游客模式加入</button>
+            <a class="btn btn-outline" href="#messages">先去留言</a>
+          </div>
+        </div>
+        <div class="join-visual">
+          <img src="assets/hero_5.png" alt="加入憨家军" loading="lazy" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>憨宝宝的小宇宙</strong>
+        <p>HanBaby Fan Universe · 粉丝自发应援站</p>
+      </div>
+      <div class="footer-links">
+        <a href="#home">首页</a>
+        <a href="#support">应援</a>
+        <a href="#messages">留言</a>
+        <a href="#assets">素材</a>
+      </div>
+      <p class="disclaimer">本站为粉丝应援非官方纯静态站点示例，托管于 GitHub Pages，无后端与真实登录。与平台无直接隶属关系。请理性应援，遵守平台规则与法律法规。</p>
+    </div>
+  </footer>
+
+  <!-- 移动端底部导航 -->
+  <nav class="bottom-nav" aria-label="移动端导航">
+    <a href="#home" class="bn-item active" data-nav="home">
+      <span class="bn-icon">⌂</span>
+      <span>首页</span>
+    </a>
+    <a href="#works" class="bn-item" data-nav="works">
+      <span class="bn-icon">▷</span>
+      <span>作品</span>
+    </a>
+    <a href="#support" class="bn-item bn-heart" data-nav="support">
+      <span class="bn-icon heart">♡</span>
+      <span>应援</span>
+    </a>
+    <a href="#messages" class="bn-item" data-nav="messages">
+      <span class="bn-icon">✦</span>
+      <span>留言</span>
+    </a>
+    <a href="#join" class="bn-item" data-nav="join">
+      <span class="bn-icon">◎</span>
+      <span>我的</span>
+    </a>
+  </nav>
+
+  <!-- Toast / 成功弹层 -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="modal" id="thanksModal" hidden>
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="关闭">×</button>
+      <div class="modal-stars" aria-hidden="true">✦ ♡ ★</div>
+      <h3>感谢你的应援！</h3>
+      <p id="modalText">小星星已经飞向憨宝宝啦～</p>
+      <button class="btn btn-primary" id="modalOk">好耶</button>
+    </div>
+  </div>
+
+  <script src="js/main.js?v=4"></script>
+  <script>
+    (function () {
+      var btn = document.getElementById("staticBannerClose");
+      var bar = document.getElementById("staticBanner");
+      if (!btn || !bar) return;
+      try {
+        if (sessionStorage.getItem("hanbaby_banner_closed") === "1") {
+          bar.hidden = true;
+        }
+      } catch (e) {}
+      btn.addEventListener("click", function () {
+        bar.hidden = true;
+        try {
+          sessionStorage.setItem("hanbaby_banner_closed", "1");
+        } catch (e) {}
+      });
+    })();
+  </script>
+</body>
+</html>

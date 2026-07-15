@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>页面不存在 · 憨宝宝的小宇宙</title>
+  <meta http-equiv="refresh" content="0; url=./index.html" />
+  <script>
+    // GitHub Pages 子路径兼容：回到站点首页
+    (function () {
+      var parts = location.pathname.split("/").filter(Boolean);
+      // /user.github.io/repo/... → 回 /repo/
+      if (parts.length >= 1) {
+        var base = "/" + parts[0] + "/";
+        // 用户主页仓库名以 .github.io 结尾时根路径是 /
+        if (parts[0].endsWith(".github.io")) {
+          location.replace("/");
+          return;
+        }
+        location.replace(base);
+        return;
+      }
+      location.replace("./");
+    })();
+  </script>
+</head>
+<body>
+  <p style="font-family: sans-serif; text-align: center; margin-top: 3rem; color: #8e8792;">
+    页面不存在，正在回到 <a href="./">憨宝宝的小宇宙</a>…
+  </p>
+</body>
+</html>
