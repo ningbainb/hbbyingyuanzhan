@@ -202,6 +202,24 @@
     "理性应援，真心最闪亮 ✦",
   ];
 
+  /* 抖音公开主页快照（scripts/fetch_douyin.py 可更新 data/profile.json） */
+  const DOUYIN_PROFILE = {
+    nickname: "憨宝宝",
+    unique_id: "81183888747",
+    sec_uid: "MS4wLjABAAAAIsFqgUpChGGpVYpp_aut0UQQeA7NYypEUM703AhiCZc",
+    followers: 100000,
+    total_favorited: 1520825,
+    aweme_count: 80,
+    following_count: 60,
+    signature: "✌︎ ॑꒳ ॑✌︎\n姐姐:@打小胆小 \n妹妹:@稳稳的\n扣皮:@小土豆子...",
+    share_url: "https://v.douyin.com/3Ed4QuQJTBA/",
+    profile_url:
+      "https://www.douyin.com/user/MS4wLjABAAAAIsFqgUpChGGpVYpp_aut0UQQeA7NYypEUM703AhiCZc",
+  };
+
+  const SHARE_CLIP =
+    "长按复制此条消息，打开抖音搜索，查看TA的更多作品。 " + DOUYIN_PROFILE.share_url;
+
   /* ---------- Utils ---------- */
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -555,9 +573,10 @@
           }
         }
 
-        // 观看任务：打开占位说明（无真实抖音 API，纯静态无法拉取作品）
         if (key === "watch") {
-          openModal("纯静态站点无法嵌入实时抖音作品。请到抖音搜索「憨宝宝」观看后，再回来点完成即可～");
+          openModal(
+            "已尝试打开抖音主页。看完回来点完成即可～ 抖音号 81183888747 / 短链已配置。"
+          );
         }
 
         done[key] = true;
@@ -615,6 +634,60 @@
       addPoints(12, 20);
       openModal("生日祝福 +1（本机记录）！纯静态站不会同步到全站总榜。");
     });
+  }
+
+  /* ---------- Douyin profile / copy ---------- */
+  function initDouyin() {
+    const links = ["#douyinLinkHero", "#douyinOpenBtn"]
+      .map((s) => $(s))
+      .filter(Boolean);
+    links.forEach((a) => {
+      a.href = DOUYIN_PROFILE.share_url || DOUYIN_PROFILE.profile_url;
+    });
+
+    const sign = $("#douyinSign");
+    if (sign && DOUYIN_PROFILE.signature) {
+      sign.textContent = DOUYIN_PROFILE.signature;
+    }
+
+    $("#copyDouyinLink")?.addEventListener("click", async () => {
+      const url = DOUYIN_PROFILE.share_url || DOUYIN_PROFILE.profile_url;
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(url);
+          toast("主页链接已复制");
+          return;
+        }
+      } catch {
+        /* fallthrough */
+      }
+      window.prompt("复制链接：", url);
+    });
+
+    $("#copyShareText")?.addEventListener("click", async () => {
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(SHARE_CLIP);
+          toast("分享文案已复制，去粘贴给朋友吧");
+          return;
+        }
+      } catch {
+        /* fallthrough */
+      }
+      window.prompt("复制分享文案：", SHARE_CLIP);
+    });
+
+    // 观看任务：跳真实主页
+    const watchBtn = $('.task-item[data-task="watch"] [data-complete]');
+    if (watchBtn) {
+      watchBtn.addEventListener(
+        "click",
+        () => {
+          window.open(DOUYIN_PROFILE.share_url, "_blank", "noopener,noreferrer");
+        },
+        { capture: true }
+      );
+    }
   }
 
   /* ---------- Join ---------- */
@@ -744,6 +817,7 @@
     renderAssets();
     initTasks();
     initCampaign();
+    initDouyin();
     initJoin();
     initNav();
     initModal();

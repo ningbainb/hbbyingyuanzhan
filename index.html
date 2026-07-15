@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Poppins:wght@500;600;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=5" />
+  <link rel="stylesheet" href="css/style.css?v=6" />
 </head>
 <body>
   <div class="bg-glow" aria-hidden="true"></div>
@@ -18,8 +18,8 @@
   <!-- 纯静态部署说明（GitHub Pages） -->
   <div class="static-banner" id="staticBanner" role="note">
     <strong>纯静态站点</strong>
-    · 任务 / 积分 / 祝福仅保存在你的浏览器，不会同步到服务器。
-    排行榜与进度为演示数据。
+    · 任务 / 积分 / 祝福仅保存在你的浏览器。
+    主页数据来自公开抖音资料快照，非实时接口。
     <button type="button" class="static-banner-close" id="staticBannerClose" aria-label="关闭提示">×</button>
   </div>
 
@@ -31,6 +31,7 @@
     </a>
     <nav class="nav-links" aria-label="主导航">
       <a href="#home">首页</a>
+      <a href="#douyin">抖音</a>
       <a href="#about">关于</a>
       <a href="#works">作品</a>
       <a href="#support">应援</a>
@@ -68,11 +69,12 @@
             <span class="tag">可爱反差</span>
             <span class="tag tag-gold">十万粉丝</span>
             <span class="tag">憨家军</span>
+            <span class="tag">抖音号 81183888747</span>
           </div>
           <div class="hero-actions">
             <a href="#support" class="btn btn-primary">进入应援中心</a>
-            <a href="#works" class="btn btn-ghost">观看代表作品</a>
-            <a href="https://www.douyin.com/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">前往抖音主页</a>
+            <a href="#works" class="btn btn-ghost">看看闪光瞬间</a>
+            <a id="douyinLinkHero" href="https://v.douyin.com/3Ed4QuQJTBA/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">打开抖音主页</a>
           </div>
         </div>
       </div>
@@ -97,30 +99,67 @@
           </article>
           <article class="stat-card glass">
             <span class="stat-icon">★</span>
-            <strong class="stat-num" data-count="1500000" data-suffix="+">0</strong>
+            <strong class="stat-num" data-count="1520825" data-suffix="+">0</strong>
             <span class="stat-label">累计获赞</span>
           </article>
           <article class="stat-card glass">
             <span class="stat-icon">✦</span>
-            <strong class="stat-num" data-count="79" data-suffix="+">0</strong>
+            <strong class="stat-num" data-count="80" data-suffix="">0</strong>
             <span class="stat-label">作品数量</span>
           </article>
           <article class="stat-card glass">
             <span class="stat-icon">☀</span>
-            <strong class="stat-num" data-count="365" data-suffix="+">0</strong>
-            <span class="stat-label">陪伴天数</span>
+            <strong class="stat-num" data-count="60" data-suffix="">0</strong>
+            <span class="stat-label">她的关注</span>
           </article>
           <article class="stat-card glass">
             <span class="stat-icon">✎</span>
             <strong class="stat-num" data-count="8260" data-suffix="">0</strong>
-            <span class="stat-label">粉丝祝福</span>
+            <span class="stat-label">粉丝祝福（演示）</span>
           </article>
           <article class="stat-card glass">
             <span class="stat-icon">◎</span>
             <strong class="stat-num" data-count="12800" data-suffix="+">0</strong>
-            <span class="stat-label">应援参与</span>
+            <span class="stat-label">应援参与（演示）</span>
           </article>
         </div>
+        <p class="stats-source static-inline-note">粉丝 / 获赞 / 作品来自抖音公开主页快照 · 短链 v.douyin.com/3Ed4QuQJTBA</p>
+      </div>
+    </section>
+
+    <!-- 抖音主页卡片 -->
+    <section class="section douyin-sec" id="douyin">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Official Douyin</p>
+          <h2>去抖音找她</h2>
+          <p class="section-desc">资料来自公开主页。打开抖音，看她更多作品与日常。</p>
+        </div>
+        <article class="douyin-card glass">
+          <div class="douyin-avatar-wrap">
+            <img src="assets/douyin/avatar.jpg" alt="憨宝宝头像" class="douyin-avatar" width="160" height="160" />
+            <span class="douyin-live-pill">抖音</span>
+          </div>
+          <div class="douyin-body">
+            <h3 class="douyin-name">憨宝宝</h3>
+            <p class="douyin-id">抖音号 <strong>81183888747</strong></p>
+            <pre class="douyin-sign" id="douyinSign">✌︎ ॑꒳ ॑✌︎
+姐姐:@打小胆小 
+妹妹:@稳稳的
+扣皮:@小土豆子...</pre>
+            <div class="douyin-metrics">
+              <div><b>10 万</b><span>粉丝</span></div>
+              <div><b>152 万+</b><span>获赞</span></div>
+              <div><b>80</b><span>作品</span></div>
+            </div>
+            <div class="hero-actions douyin-actions">
+              <a class="btn btn-primary" id="douyinOpenBtn" href="https://v.douyin.com/3Ed4QuQJTBA/" target="_blank" rel="noopener noreferrer">打开抖音主页</a>
+              <button type="button" class="btn btn-ghost" id="copyDouyinLink">复制主页链接</button>
+              <button type="button" class="btn btn-outline" id="copyShareText">复制分享文案</button>
+            </div>
+            <p class="static-inline-note">手机：复制链接后粘贴到浏览器 / 抖音内打开 · 电脑：点击按钮跳转</p>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -141,15 +180,17 @@
           <h2>关于憨宝宝</h2>
           <p class="lead">
             她是镜头前有一点害羞、有一点可爱，也有很多真诚的憨宝宝。
-            她用日常、情绪和生活碎片，陪伴越来越多的人。
-            这里不只记录她的成长，也记录每一位粉丝与她相遇的瞬间。
+            抖音上用日常、表情和生活碎片，陪着十万憨家军长大。
+            这里是粉丝自发的小宇宙：记录喜欢，也理性应援。
           </p>
           <ul class="info-list">
             <li><span>昵称</span><strong>憨宝宝</strong></li>
             <li><span>平台</span><strong>抖音</strong></li>
-            <li><span>粉丝</span><strong>10 万+</strong></li>
-            <li><span>内容</span><strong>日常分享 · 生活记录 · 可爱互动</strong></li>
-            <li><span>地区</span><strong>湖南</strong></li>
+            <li><span>抖音号</span><strong>81183888747</strong></li>
+            <li><span>粉丝</span><strong>10 万（公开快照）</strong></li>
+            <li><span>获赞</span><strong>约 152 万</strong></li>
+            <li><span>作品</span><strong>80 条</strong></li>
+            <li><span>内容</span><strong>日常分享 · 可爱互动 · 生活记录</strong></li>
             <li><span>粉丝称呼</span><strong>憨家军</strong></li>
           </ul>
           <div class="trait-row">
@@ -408,7 +449,7 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=5"></script>
+  <script src="js/main.js?v=6"></script>
   <script>
     (function () {
       var btn = document.getElementById("staticBannerClose");

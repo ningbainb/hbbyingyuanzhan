@@ -12,6 +12,11 @@ node_modules/
 .cache/
 dist/
 
+# raw API dumps (keep profile.json for site)
+data/user_raw.json
+data/posts_raw.json
+data/tmp.json
+
 # 根目录重复/草稿素材（站点只用 assets/）
 /emoji_*.png
 /ChatGPT_Image_*.png
