@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Poppins:wght@500;600;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=4" />
+  <link rel="stylesheet" href="css/style.css?v=5" />
 </head>
 <body>
   <div class="bg-glow" aria-hidden="true"></div>
@@ -18,7 +18,7 @@
   <!-- 纯静态部署说明（GitHub Pages） -->
   <div class="static-banner" id="staticBanner" role="note">
     <strong>纯静态站点</strong>
-    · 留言 / 任务 / 积分 / 祝福仅保存在你的浏览器，不会同步到服务器，其他访客看不到。
+    · 任务 / 积分 / 祝福仅保存在你的浏览器，不会同步到服务器。
     排行榜与进度为演示数据。
     <button type="button" class="static-banner-close" id="staticBannerClose" aria-label="关闭提示">×</button>
   </div>
@@ -35,8 +35,6 @@
       <a href="#works">作品</a>
       <a href="#support">应援</a>
       <a href="#timeline">轨迹</a>
-      <a href="#messages">留言</a>
-      <a href="#create">共创</a>
       <a href="#assets">素材</a>
       <a href="#join">加入</a>
     </nav>
@@ -311,69 +309,7 @@
       </div>
     </section>
 
-    <!-- 10 粉丝留言墙 -->
-    <section class="section messages" id="messages">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Star Message Wall</p>
-          <h2>星球留言墙</h2>
-          <p class="section-desc">每一条留言是一颗小星星，点击后展开祝福内容。</p>
-          <p class="static-inline-note" id="staticMsgNote">留言仅保存在本机浏览器，不会上传，其他访客看不到。</p>
-        </div>
-
-        <div class="planet-stage" id="planetStage">
-          <div class="planet-core">
-            <img src="assets/emoji_1.png" alt="留言星球" />
-            <span>点亮一颗星</span>
-          </div>
-          <!-- stars injected -->
-        </div>
-
-        <form class="message-form glass" id="messageForm">
-          <h3>写下一句想对她说的话</h3>
-          <p class="static-inline-note">纯静态演示 · 提交后只写进你的浏览器 localStorage</p>
-          <div class="form-row">
-            <label>
-              昵称
-              <input type="text" name="nickname" maxlength="16" placeholder="你的昵称" required />
-            </label>
-            <label>
-              城市 <small>（可选）</small>
-              <input type="text" name="city" maxlength="20" placeholder="来自哪里" />
-            </label>
-          </div>
-          <label>
-            祝福内容
-            <textarea name="content" rows="3" maxlength="200" placeholder="第一次刷到你是在…… 我最喜欢你的…… 想对你说……" required></textarea>
-          </label>
-          <label class="check-inline">
-            <input type="checkbox" name="anonymous" />
-            匿名发布
-          </label>
-          <div class="form-actions">
-            <button type="submit" class="btn btn-primary">发射小星星</button>
-            <span class="form-hint" id="formHint"></span>
-          </div>
-        </form>
-
-        <div class="message-cards" id="messageCards"></div>
-      </div>
-    </section>
-
-    <!-- 11 粉丝共创 -->
-    <section class="section create" id="create">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Fan Creation Gallery</p>
-          <h2>憨家军创作馆</h2>
-          <p class="section-desc">绘画、海报、表情包、壁纸……把喜欢变成作品，挂进小宇宙画廊。</p>
-        </div>
-        <div class="gallery-grid" id="galleryGrid"></div>
-        <p class="empty-hint">投稿需后端/表单服务，纯静态站暂不支持上传 · 当前为展示示例</p>
-      </div>
-    </section>
-
-    <!-- 12 素材下载 -->
+    <!-- 素材下载 -->
     <section class="section assets-sec" id="assets">
       <div class="container">
         <div class="section-head">
@@ -410,7 +346,7 @@
           </ul>
           <div class="hero-actions">
             <button class="btn btn-primary" id="joinBtn">游客模式加入</button>
-            <a class="btn btn-outline" href="#messages">先去留言</a>
+            <a class="btn btn-outline" href="#support">去应援中心</a>
           </div>
         </div>
         <div class="join-visual">
@@ -429,7 +365,7 @@
       <div class="footer-links">
         <a href="#home">首页</a>
         <a href="#support">应援</a>
-        <a href="#messages">留言</a>
+        <a href="#works">作品</a>
         <a href="#assets">素材</a>
       </div>
       <p class="disclaimer">本站为粉丝应援非官方纯静态站点示例，托管于 GitHub Pages，无后端与真实登录。与平台无直接隶属关系。请理性应援，遵守平台规则与法律法规。</p>
@@ -450,9 +386,9 @@
       <span class="bn-icon heart">♡</span>
       <span>应援</span>
     </a>
-    <a href="#messages" class="bn-item" data-nav="messages">
+    <a href="#assets" class="bn-item" data-nav="assets">
       <span class="bn-icon">✦</span>
-      <span>留言</span>
+      <span>素材</span>
     </a>
     <a href="#join" class="bn-item" data-nav="join">
       <span class="bn-icon">◎</span>
@@ -472,7 +408,7 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=4"></script>
+  <script src="js/main.js?v=5"></script>
   <script>
     (function () {
       var btn = document.getElementById("staticBannerClose");

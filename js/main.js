@@ -1,11 +1,10 @@
 /* 憨宝宝的小宇宙 · 纯静态前端交互（GitHub Pages 兼容）
- * 无后端：留言/任务/积分/祝福仅保存在当前浏览器 localStorage，不跨设备、不共享给他人。
+ * 无后端：任务/积分/祝福仅保存在当前浏览器 localStorage，不跨设备、不共享给他人。
  */
 (function () {
   "use strict";
 
   const STORAGE = {
-    messages: "hanbaby_messages_v1",
     tasks: "hanbaby_tasks_v1",
     points: "hanbaby_points_v1",
     joined: "hanbaby_joined_v1",
@@ -156,15 +155,6 @@
     { name: "奶油蝴蝶结", score: 6980, badge: "初见小星星", avatar: "assets/emoji_9.png" },
   ];
 
-  const GALLERY = [
-    { title: "手绘头像 · Pink Day", author: "by 粉丝画手 A", img: "assets/emoji_1.png" },
-    { title: "比心瞬间", author: "by 应援海报组", img: "assets/hero_7.png" },
-    { title: "贝雷帽日常", author: "by 憨家军创作", img: "assets/hero_6.png" },
-    { title: "水手服纪念", author: "by 同人插画", img: "assets/emoji_8.png" },
-    { title: "挥手问候", author: "by 壁纸工坊", img: "assets/hero_2.png" },
-    { title: "主视觉收藏", author: "by 官方推荐风", img: "assets/hero_1.png" },
-  ];
-
   const ASSETS = [
     {
       title: "官方主视觉插画",
@@ -210,27 +200,6 @@
     "感谢你的陪伴，小宇宙又亮了一点点。",
     "你的喜欢，是她继续前进的光。",
     "理性应援，真心最闪亮 ✦",
-  ];
-
-  const DEFAULT_MESSAGES = [
-    {
-      nickname: "初见小星",
-      city: "长沙",
-      content: "第一次刷到你是在推荐页。想对你说：谢谢你把日常过成光。",
-      time: "2026-06-01",
-    },
-    {
-      nickname: "粉紫奶盖",
-      city: "广州",
-      content: "最喜欢你的反差可爱。希望以后可以陪你走到下一个十万。",
-      time: "2026-06-12",
-    },
-    {
-      nickname: "憨家军一号",
-      city: "上海",
-      content: "十万粉丝快乐！每一份喜欢都值得被认真对待。",
-      time: "2026-07-01",
-    },
   ];
 
   /* ---------- Utils ---------- */
@@ -502,23 +471,7 @@
     ).join("");
   }
 
-  /* ---------- Gallery & Assets ---------- */
-  function renderGallery() {
-    const grid = $("#galleryGrid");
-    if (!grid) return;
-    grid.innerHTML = GALLERY.map(
-      (g) => `
-      <article class="gallery-card reveal">
-        <img src="${g.img}" alt="${g.title}" loading="lazy" />
-        <div class="gallery-meta">
-          <h3>${g.title}</h3>
-          <p class="author">${g.author}</p>
-        </div>
-      </article>`
-    ).join("");
-    observeReveals(grid);
-  }
-
+  /* ---------- Assets ---------- */
   function renderAssets() {
     const grid = $("#assetGrid");
     if (!grid) return;
@@ -542,136 +495,6 @@
       });
     });
     observeReveals(grid);
-  }
-
-  /* ---------- Messages ---------- */
-  function getMessages() {
-    const saved = loadJSON(STORAGE.messages, null);
-    if (!saved || !saved.length) {
-      saveJSON(STORAGE.messages, DEFAULT_MESSAGES);
-      return [...DEFAULT_MESSAGES];
-    }
-    return saved;
-  }
-
-  function storageHintText() {
-    if (!storageOk) {
-      return "当前环境无法长期保存数据，刷新后可能丢失（纯静态演示）。";
-    }
-    return "留言仅保存在本机浏览器，不会上传到服务器，其他人看不到。";
-  }
-
-  function renderMessageCards(messages) {
-    const box = $("#messageCards");
-    if (!box) return;
-    const list = [...messages].reverse();
-    if (!list.length) {
-      box.innerHTML = `<p class="empty-hint">这里还没有星星，成为第一个给憨宝宝留言的人吧。</p>`;
-      return;
-    }
-    box.innerHTML = list
-      .map(
-        (m) => `
-      <article class="msg-card">
-        <div class="who">${escapeHtml(m.nickname)}${m.city ? ` <span class="city">· ${escapeHtml(m.city)}</span>` : ""}</div>
-        <p class="body">${escapeHtml(m.content)}</p>
-        <p class="time">${escapeHtml(m.time || "")}</p>
-      </article>`
-      )
-      .join("");
-  }
-
-  function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
-  }
-
-  function placeStars(messages) {
-    const stage = $("#planetStage");
-    if (!stage) return;
-    $$(".star-msg", stage).forEach((el) => el.remove());
-
-    const count = Math.min(messages.length, 24);
-    for (let i = 0; i < count; i++) {
-      const m = messages[messages.length - 1 - i];
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "star-msg";
-      btn.title = m.nickname + "：" + m.content.slice(0, 20);
-      const angle = (i / count) * Math.PI * 2 + (i % 3) * 0.2;
-      const r = 28 + (i % 5) * 8;
-      const x = 50 + Math.cos(angle) * r;
-      const y = 50 + Math.sin(angle) * (r * 0.75);
-      btn.style.left = `calc(${x}% - 14px)`;
-      btn.style.top = `calc(${y}% - 14px)`;
-      btn.style.animationDelay = (i * 0.12) + "s";
-      btn.addEventListener("click", () => {
-        openModal(`${m.nickname}${m.city ? " · " + m.city : ""}：${m.content}`);
-      });
-      stage.appendChild(btn);
-    }
-  }
-
-  function initMessages() {
-    const messages = getMessages();
-    renderMessageCards(messages);
-    placeStars(messages);
-
-    const staticNote = $("#staticMsgNote");
-    if (staticNote) staticNote.textContent = storageHintText();
-
-    const form = $("#messageForm");
-    if (!form) return;
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const fd = new FormData(form);
-      let nickname = String(fd.get("nickname") || "").trim();
-      const city = String(fd.get("city") || "").trim();
-      const content = String(fd.get("content") || "").trim();
-      const anonymous = fd.get("anonymous") === "on";
-
-      if (!content || content.length < 2) {
-        toast("写一句真心话再发射吧～");
-        return;
-      }
-      if (anonymous) nickname = "匿名小星星";
-      if (!nickname) nickname = "路过的粉丝";
-
-      // 轻量敏感词
-      const bad = /(微信|加我|http|www\.|赌博|色情)/i;
-      if (bad.test(content) || bad.test(nickname)) {
-        toast("内容含有不适宜信息，请修改后再试");
-        return;
-      }
-
-      const list = getMessages();
-      list.push({
-        nickname: nickname.slice(0, 16),
-        city: city.slice(0, 20),
-        content: content.slice(0, 200),
-        time: new Date().toLocaleDateString("zh-CN"),
-      });
-      saveJSON(STORAGE.messages, list);
-      renderMessageCards(list);
-      placeStars(list);
-      form.reset();
-      const hint = $("#formHint");
-      if (hint) {
-        hint.textContent = storageOk
-          ? "小星星已点亮（仅本机可见）"
-          : "已点亮（当前无法持久保存）";
-      }
-      openModal(
-        storageOk
-          ? "你的祝福已成为本机小宇宙里的一颗星（纯静态站，不会同步到云端）。"
-          : "祝福已展示。注意：当前浏览器无法保存，刷新后可能消失。"
-      );
-      addPoints(5, 10);
-    });
   }
 
   /* ---------- Tasks & Points ---------- */
@@ -857,7 +680,7 @@
   }
 
   function updateBottomNav() {
-    const sections = ["home", "works", "support", "messages", "join"];
+    const sections = ["home", "works", "support", "assets", "join"];
     let current = "home";
     const y = window.scrollY + 120;
     sections.forEach((id) => {
@@ -918,9 +741,7 @@
     initWorkFilters();
     renderTimeline();
     renderRank();
-    renderGallery();
     renderAssets();
-    initMessages();
     initTasks();
     initCampaign();
     initJoin();
