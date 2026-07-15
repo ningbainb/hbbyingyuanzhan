@@ -675,7 +675,7 @@
     const bar = $(".progress-bar");
     const note = $("#campaignStaticNote");
     if (note) {
-      note.textContent = "演示进度：纯静态站无法全网统计，数字保存在你的浏览器里。";
+      note.textContent = "进度为本机演示记录，每日可送出一次祝福。";
     }
 
     function updateUI() {
@@ -700,7 +700,7 @@
       storageSet(key, "1");
       updateUI();
       addPoints(12, 20);
-      openModal("生日祝福 +1（本机记录）！纯静态站不会同步到全站总榜。");
+      openModal("生日祝福 +1！谢谢你点亮小宇宙（本机记录）。");
     });
   }
 
