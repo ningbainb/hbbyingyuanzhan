@@ -407,8 +407,10 @@
   function initFloatLayer() {
     const layer = $("#floatLayer");
     if (!layer) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const chars = ["♡", "✦", "☆", "·", "✧"];
-    for (let i = 0; i < 18; i++) {
+    const count = window.matchMedia("(max-width: 640px)").matches ? 8 : 14;
+    for (let i = 0; i < count; i++) {
       const s = document.createElement("span");
       s.className = "float-particle";
       s.textContent = chars[i % chars.length];
@@ -475,7 +477,7 @@
         (w) => `
       <a class="work-card reveal" data-cat="${w.cat}" href="${workHref(w)}" target="_blank" rel="noopener noreferrer" aria-label="在抖音查看：${escapeHtml(w.title)}">
         <div class="work-cover">
-          <img src="${w.cover}" alt="${escapeHtml(w.title)}" loading="lazy" />
+          <img src="${w.cover}" alt="${escapeHtml(w.title)}" loading="lazy" decoding="async" />
           <span class="work-badge">${escapeHtml(w.tag)}</span>
           <span class="work-likes">♡ ${escapeHtml(w.likes)}</span>
           <span class="work-play" aria-hidden="true">▶ 抖音</span>
@@ -674,8 +676,8 @@
     const countEl = $("#blessCount");
     const bar = $(".progress-bar");
     const note = $("#campaignStaticNote");
-    if (note) {
-      note.textContent = "进度为本机演示记录，每日可送出一次祝福。";
+    if (note && !note.textContent.trim()) {
+      note.textContent = "进度记在本机，每人每天可送一次。";
     }
 
     function updateUI() {
@@ -780,33 +782,79 @@
   /* ---------- Nav / Scroll ---------- */
   function initNav() {
     const topNav = $("#topNav");
-    window.addEventListener(
-      "scroll",
-      () => {
-        if (topNav) topNav.classList.toggle("scrolled", window.scrollY > 20);
-        updateBottomNav();
-      },
-      { passive: true }
-    );
+    const backTop = $("#backTop");
+    let ticking = false;
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        if (topNav) topNav.classList.toggle("scrolled", y > 20);
+        if (backTop) backTop.hidden = y < 480;
+        updateActiveNav();
+        ticking = false;
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     $$(".bottom-nav a, .nav-links a, .logo, .nav-cta").forEach((a) => {
       a.addEventListener("click", () => {
-        // active state after jump
-        setTimeout(updateBottomNav, 100);
+        setTimeout(updateActiveNav, 120);
       });
     });
+
+    backTop?.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    onScroll();
   }
 
-  function updateBottomNav() {
-    const sections = ["home", "works", "tools", "support", "join"];
+  function updateActiveNav() {
+    const map = [
+      "home",
+      "stats",
+      "douyin",
+      "about",
+      "works",
+      "tools",
+      "support",
+      "timeline",
+      "assets",
+      "join",
+    ];
     let current = "home";
-    const y = window.scrollY + 120;
-    sections.forEach((id) => {
+    const y = window.scrollY + 140;
+    map.forEach((id) => {
       const el = document.getElementById(id);
       if (el && el.offsetTop <= y) current = id;
     });
+
+    // 底栏只高亮主入口
+    const bottomMap = {
+      home: "home",
+      stats: "home",
+      douyin: "home",
+      about: "home",
+      works: "works",
+      tools: "tools",
+      support: "support",
+      timeline: "support",
+      assets: "tools",
+      join: "join",
+    };
+    const bn = bottomMap[current] || "home";
     $$(".bn-item").forEach((a) => {
-      a.classList.toggle("active", a.dataset.nav === current);
+      a.classList.toggle("active", a.dataset.nav === bn);
+    });
+
+    // 顶栏链接高亮
+    $$(".nav-links a").forEach((a) => {
+      const href = a.getAttribute("href") || "";
+      const id = href.startsWith("#") ? href.slice(1) : "";
+      a.classList.toggle("is-active", id === current);
     });
   }
 
@@ -867,7 +915,7 @@
     initModal();
     initParallax();
     observeReveals();
-    updateBottomNav();
+    updateActiveNav();
   }
 
   if (document.readyState === "loading") {

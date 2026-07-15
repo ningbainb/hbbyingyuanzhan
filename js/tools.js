@@ -401,6 +401,23 @@
       saveCheckins(days);
       renderCheckin();
       toast("打卡成功 · 连续 " + calcStreak(days) + " 天");
+      // 同步应援任务里的「每日签到」（同日本机）
+      try {
+        const key = "hanbaby_tasks_v1";
+        const all = JSON.parse(localStorage.getItem(key) || "{}");
+        const day = t;
+        if (!all[day]) all[day] = {};
+        all[day].checkin = true;
+        localStorage.setItem(key, JSON.stringify(all));
+        const item = document.querySelector('.task-item[data-task="checkin"]');
+        if (item) {
+          item.classList.add("done");
+          const b = item.querySelector("[data-complete]");
+          if (b) b.textContent = "已完成";
+        }
+      } catch {
+        /* ignore */
+      }
     });
     renderCheckin();
   }
