@@ -1235,11 +1235,33 @@ ol {
   border: 1px solid rgba(255, 255, 255, 0.95);
   display: flex;
   flex-direction: column;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .work-card:hover {
   transform: translateY(-8px);
   box-shadow: var(--shadow-hover);
+}
+
+.work-card:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-hover), var(--ring);
+}
+
+.works-foot {
+  text-align: center;
+  margin-top: 1.5rem;
+  max-width: 40em;
+  margin-inline: auto;
+}
+
+.works-foot a {
+  color: var(--dream-purple);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 /* 作品封面：高度随图片，不强制比例、不裁切 */
@@ -1289,6 +1311,31 @@ ol {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
+.work-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.92);
+  opacity: 0;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(40, 35, 43, 0.72);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  transition: opacity 0.3s, transform 0.3s var(--ease);
+  pointer-events: none;
+}
+
+.work-card:hover .work-play,
+.work-card:focus-visible .work-play {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
 .work-body {
   padding: 0.95rem 1rem 1.1rem;
   flex: 1;
@@ -1312,6 +1359,21 @@ ol {
   -webkit-box-orient: vertical;
   overflow: hidden;
   line-height: 1.5;
+  flex: 1;
+}
+
+.work-cta {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--dream-purple);
+  transition: transform 0.2s, gap 0.2s;
+}
+
+.work-card:hover .work-cta {
+  transform: translateX(3px);
 }
 
 @media (min-width: 768px) {

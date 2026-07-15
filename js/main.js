@@ -24,78 +24,128 @@
   /** 内存降级存储（localStorage 不可用时） */
   const memStore = {};
 
+  /* 代表作品清单（精选标题 + 跳转抖音主页；单条视频链因平台限制用主页入口） */
+  const DOUYIN_HOME = "https://v.douyin.com/3Ed4QuQJTBA/";
   const WORKS = [
     {
       id: 1,
-      title: "初次让大家记住她的视频",
-      desc: "那个眼神一抬，小宇宙就亮了。",
+      title: "那个眼神一抬 · 破圈初印象",
+      desc: "很多人说：刷到的第一条，就记住了憨宝宝。",
       cover: "assets/emoji_1.png",
-      likes: "12.6万",
+      likes: "高赞",
       cat: "hot",
       tag: "最高点赞",
+      url: DOUYIN_HOME,
     },
     {
       id: 2,
-      title: "今日份可爱已送达",
-      desc: "日常分享，把温柔留给屏幕前的你。",
+      title: "✌︎ 今日份可爱已送达",
+      desc: "签名同款元气脸，日常里藏着小星星。",
       cover: "assets/emoji_2.png",
-      likes: "8.2万",
+      likes: "日常",
       cat: "daily",
       tag: "日常分享",
+      url: DOUYIN_HOME,
     },
     {
       id: 3,
-      title: "憨宝宝的反差瞬间",
-      desc: "甜酷切换自如，真实又有趣。",
+      title: "Hi · 眨眼比耶瞬间",
+      desc: "甜酷切换自如，屏幕前会心一笑。",
       cover: "assets/emoji_3.png",
-      likes: "15.1万",
+      likes: "颜值",
       cat: "look",
       tag: "颜值高光",
+      url: DOUYIN_HOME,
     },
     {
       id: 4,
-      title: "最受粉丝喜欢的瞬间",
-      desc: "比心、眨眼，全是小惊喜。",
+      title: "比心特辑 · 粉丝最爱",
+      desc: "比心、眨眼，都是留给憨家军的小惊喜。",
       cover: "assets/hero_4.png",
-      likes: "18.0万",
+      likes: "热门",
       cat: "hot",
       tag: "粉丝最爱",
+      url: DOUYIN_HOME,
     },
     {
       id: 5,
-      title: "十万粉丝前夜",
-      desc: "和憨家军一起熬过的那个夜晚。",
+      title: "十万粉丝 · 谢谢遇见",
+      desc: "从第一个关注到十万份喜欢，故事还在继续。",
       cover: "assets/hero_6.png",
-      likes: "9.4万",
+      likes: "纪念",
       cat: "grow",
       tag: "成长记录",
+      url: DOUYIN_HOME,
     },
     {
       id: 6,
-      title: "粉色蝴蝶结日",
-      desc: "校服感造型，手绘风氛围拉满。",
+      title: "粉色蝴蝶结 · 手绘感造型日",
+      desc: "校服感、蝴蝶结，粉紫氛围拉满。",
       cover: "assets/hero_7.png",
-      likes: "7.8万",
+      likes: "造型",
       cat: "look",
       tag: "颜值高光",
+      url: DOUYIN_HOME,
     },
     {
       id: 7,
-      title: "生活碎片小集合",
-      desc: "吃饭、出门、发呆，都是陪伴。",
-      cover: "assets/emoji_7.png",
-      likes: "6.1万",
+      title: "奶茶在手 · 生活碎片",
+      desc: "出门、发呆、喝一口，都是陪伴。",
+      cover: "assets/emoji_9.png",
+      likes: "日常",
       cat: "daily",
       tag: "日常分享",
+      url: DOUYIN_HOME,
     },
     {
       id: 8,
-      title: "水手服高光时刻",
-      desc: "镜头前的她，像漫画里走出来的。",
+      title: "水手服高光 · 漫画感出场",
+      desc: "镜头前的她，像从插画里走出来。",
       cover: "assets/emoji_8.png",
-      likes: "11.3万",
+      likes: "高光",
       cat: "look",
       tag: "颜值高光",
+      url: DOUYIN_HOME,
+    },
+    {
+      id: 9,
+      title: "侧颜发呆 · 安静的可爱",
+      desc: "不说话的时候，也很好看。",
+      cover: "assets/emoji_7.png",
+      likes: "氛围",
+      cat: "daily",
+      tag: "日常分享",
+      url: DOUYIN_HOME,
+    },
+    {
+      id: 10,
+      title: "挥手问候 · 欢迎来到小宇宙",
+      desc: "新朋友？先看她的主页，再回来应援。",
+      cover: "assets/hero_2.png",
+      likes: "欢迎",
+      cat: "grow",
+      tag: "成长记录",
+      url: DOUYIN_HOME,
+    },
+    {
+      id: 11,
+      title: "贝雷帽主视觉 · 今日份收藏",
+      desc: "站内主视觉同源氛围，去抖音看动态版。",
+      cover: "assets/hero_1.png",
+      likes: "镇站",
+      cat: "hot",
+      tag: "最高点赞",
+      url: DOUYIN_HOME,
+    },
+    {
+      id: 12,
+      title: "托腮发呆 · 温柔停顿",
+      desc: "慢一点也没关系，我们一直在。",
+      cover: "assets/hero_5.png",
+      likes: "温柔",
+      cat: "look",
+      tag: "颜值高光",
+      url: DOUYIN_HOME,
     },
   ];
 
@@ -408,27 +458,45 @@
   }
 
   /* ---------- Works ---------- */
+  function workHref(w) {
+    return w.url || DOUYIN_HOME || DOUYIN_PROFILE.share_url;
+  }
+
   function renderWorks(filter = "all") {
     const grid = $("#worksGrid");
     if (!grid) return;
     const list = filter === "all" ? WORKS : WORKS.filter((w) => w.cat === filter);
+    if (!list.length) {
+      grid.innerHTML = `<p class="empty-hint">这一类暂时还没有收录，去抖音主页看看更多吧～</p>`;
+      return;
+    }
     grid.innerHTML = list
       .map(
         (w) => `
-      <article class="work-card reveal" data-cat="${w.cat}">
+      <a class="work-card reveal" data-cat="${w.cat}" href="${workHref(w)}" target="_blank" rel="noopener noreferrer" aria-label="在抖音查看：${escapeHtml(w.title)}">
         <div class="work-cover">
-          <img src="${w.cover}" alt="${w.title}" loading="lazy" />
-          <span class="work-badge">${w.tag}</span>
-          <span class="work-likes">♡ ${w.likes}</span>
+          <img src="${w.cover}" alt="${escapeHtml(w.title)}" loading="lazy" />
+          <span class="work-badge">${escapeHtml(w.tag)}</span>
+          <span class="work-likes">♡ ${escapeHtml(w.likes)}</span>
+          <span class="work-play" aria-hidden="true">▶ 抖音</span>
         </div>
         <div class="work-body">
-          <h3>${w.title}</h3>
-          <p>${w.desc}</p>
+          <h3>${escapeHtml(w.title)}</h3>
+          <p>${escapeHtml(w.desc)}</p>
+          <span class="work-cta">去抖音看 TA →</span>
         </div>
-      </article>`
+      </a>`
       )
       .join("");
     observeReveals(grid);
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
   }
 
   function initWorkFilters() {
