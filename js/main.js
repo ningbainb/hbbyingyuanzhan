@@ -777,29 +777,6 @@
     });
   }
 
-  function initStaticBanner() {
-    const el = $("#staticBanner");
-    if (!el) return;
-    try {
-      if (sessionStorage.getItem("hanbaby_banner_closed") === "1" && storageOk) {
-        el.hidden = true;
-        return;
-      }
-    } catch {
-      /* ignore */
-    }
-    if (!storageOk) {
-      el.hidden = false;
-      el.classList.add("warn");
-      el.innerHTML =
-        "<strong>存储受限</strong>：当前浏览器无法使用 localStorage，交互数据刷新后可能丢失。" +
-        '<button type="button" class="static-banner-close" id="staticBannerClose" aria-label="关闭提示">×</button>';
-      $("#staticBannerClose")?.addEventListener("click", () => {
-        el.hidden = true;
-      });
-    }
-  }
-
   /* ---------- Nav / Scroll ---------- */
   function initNav() {
     const topNav = $("#topNav");
@@ -875,7 +852,6 @@
 
   /* ---------- Boot ---------- */
   function boot() {
-    initStaticBanner();
     initFloatLayer();
     initStatsObserver();
     renderWorks("all");
