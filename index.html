@@ -9,21 +9,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Poppins:wght@500;600;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=8" />
+  <link rel="stylesheet" href="css/style.css?v=9" />
 </head>
 <body>
   <div class="bg-glow" aria-hidden="true"></div>
   <div class="float-layer" id="floatLayer" aria-hidden="true"></div>
-
-  <!-- 纯静态部署说明（GitHub Pages） -->
-  <div class="static-banner" id="staticBanner" role="note">
-    <span class="static-banner-pill">Tips</span>
-    <span class="static-banner-text">
-      <strong>纯静态站点</strong>
-      · 任务 / 积分 / 祝福仅保存在本机 · 抖音数据为公开快照
-    </span>
-    <button type="button" class="static-banner-close" id="staticBannerClose" aria-label="关闭提示">×</button>
-  </div>
 
   <!-- 顶部导航 -->
   <header class="top-nav" id="topNav">
@@ -460,24 +450,6 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=8"></script>
-  <script>
-    (function () {
-      var btn = document.getElementById("staticBannerClose");
-      var bar = document.getElementById("staticBanner");
-      if (!btn || !bar) return;
-      try {
-        if (sessionStorage.getItem("hanbaby_banner_closed") === "1") {
-          bar.hidden = true;
-        }
-      } catch (e) {}
-      btn.addEventListener("click", function () {
-        bar.hidden = true;
-        try {
-          sessionStorage.setItem("hanbaby_banner_closed", "1");
-        } catch (e) {}
-      });
-    })();
-  </script>
+  <script src="js/main.js?v=9"></script>
 </body>
 </html>
