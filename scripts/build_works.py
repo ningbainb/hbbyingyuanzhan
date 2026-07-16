@@ -77,11 +77,13 @@ def main() -> None:
             cover_rel = "assets/hero_1.jpg"
 
         cat, tag = cat_of(v.get("desc") or "")
+        raw_desc = (v.get("desc") or "").replace("\r", " ").replace("\n", " ")
+        raw_desc = re.sub(r"\s+", " ", raw_desc).strip()[:60]
         works.append(
             {
                 "id": i,
                 "title": clean_title(v.get("desc") or ""),
-                "desc": (v.get("desc") or "")[:60],
+                "desc": raw_desc,
                 "cover": cover_rel,
                 "likes": fmt_likes(v.get("likes")),
                 "cat": cat,
