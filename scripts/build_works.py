@@ -87,6 +87,7 @@ def main() -> None:
                 "cat": cat,
                 "tag": tag,
                 "url": v["share_url"],
+                "play": v.get("play_url") or "",
                 "aweme_id": v["id"],
             }
         )

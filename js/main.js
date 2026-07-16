@@ -24,7 +24,7 @@
   /** 内存降级存储（localStorage 不可用时） */
   const memStore = {};
 
-  /* 抖音真实作品（share 页链接稳定；直链 play_url 会过期故不使用） */
+  /* 抖音真实作品：url=视频页，play=直链（会过期，需定期 fetch_videos） */
   const DOUYIN_HOME = "https://v.douyin.com/3Ed4QuQJTBA/";
   const WORKS = [
     {
@@ -36,6 +36,7 @@
       cat: "hot",
       tag: "热门",
       url: "https://www.douyin.com/video/7643414360581361530",
+      play: "https://v26-web.douyinvod.com/dfb5b4c3bd33bb2f6447ef5c8f2d44b3/6a5873d9/video/tos/cn/tos-cn-ve-15c000-ce/oIYIAWc1iiAQPCQwEeCBnDcGWO3B511SWEFfBO/?a=6383&ch=10010&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C3&cv=1&br=1087&bt=1087&cs=0&ds=3&ft=pEaFx4hZffPdHK~2N12NvAq-antLjrKtuBQuRka9wb8jljVhWL6&mime_type=video_mp4&qs=0&rc=PGUzZzs3OjZnPDlkZ2Y5OUBpamhqNG85cjRnOzMzbGkzNUBgMTMuYDNjXy8xYzAtXi1iYSNuYF81MmRzbTZhLS1kLTRzcw%3D%3D&btag=80000e00008000&cquery=100o_101r_100B_100x_100z&dy_q=1784170911&feature_id=f5241e7604dff1d9d6c943fd20bd51a2&l=2026071611015167DCE2B2AE4D840420A3",
     },
     {
       id: 2,
@@ -46,6 +47,7 @@
       cat: "look",
       tag: "颜值高光",
       url: "https://www.douyin.com/video/7630513408798691449",
+      play: "https://v26-web.douyinvod.com/e5323da55bfd6d7aedbfcfc737aa2647/6a5873ea/video/tos/cn/tos-cn-ve-15c000-ce/oogWpIwf9pEGvoEeBwDKHbFQlxn5wA2Q8iDEIA/?a=6383&ch=10010&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C3&cv=1&br=690&bt=690&cs=0&ds=6&ft=pEaFx4hZffPdHK~2N12NvAq-antLjrKtuBQuRka9wb8jljVhWL6&mime_type=video_mp4&qs=0&rc=NTY6NGU0MzYzPGhpNTVoZEBpM2UzOHU5cmxqOjMzbGkzNUAtMC9iXjRhX2AxYTY1NDNiYSNgNDRjMmQ0YWZhLS1kLTVzcw%3D%3D&btag=80000e00010000&cquery=101r_100B_100x_100z_100o&dy_q=1784170911&feature_id=f5241e7604dff1d9d6c943fd20bd51a2&l=2026071611015167DCE2B2AE4D840420A3",
     },
     {
       id: 3,
@@ -56,6 +58,7 @@
       cat: "look",
       tag: "颜值高光",
       url: "https://www.douyin.com/video/7644881495202923365",
+      play: "https://v26-web.douyinvod.com/7de510ce00bc377dc334b196f050c6ae/6a5873e6/video/tos/cn/tos-cn-ve-15c000-ce/oMlDIqeMgMc7AQLpUFIoFiL8BAJwOCeJD8geGV/?a=6383&ch=10010&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C3&cv=1&br=920&bt=920&cs=0&ds=3&ft=pEaFx4hZffPdHK~2N12NvAq-antLjrKtuBQuRka9wb8jljVhWL6&mime_type=video_mp4&qs=0&rc=aTc7OmloZjo7ODU0ZzM0OUBpamllO3E5cjc0OzMzbGkzNUA1MjYzL2IvNjAxMy80MzQvYSM0LV4yMmRrMGBhLS1kLTRzcw%3D%3D&btag=80000e00010000&cquery=100x_100z_100o_101r_100B&dy_q=1784170911&feature_id=f5241e7604dff1d9d6c943fd20bd51a2&l=2026071611015167DCE2B2AE4D840420A3",
     },
     {
       id: 4,
@@ -66,6 +69,7 @@
       cat: "look",
       tag: "颜值高光",
       url: "https://www.douyin.com/video/7652687278062301041",
+      play: "https://v26-web.douyinvod.com/69189ef8951aaba1913bac6156e8d94d/6a5873e2/video/tos/cn/tos-cn-ve-15c000-ce/o8pMzPabLzIE0iivXOjQj1pBchwXPvI0CEAAP/?a=6383&ch=10010&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C3&cv=1&br=914&bt=914&cs=0&ds=3&ft=pEaFx4hZffPdHK~2N12NvAq-antLjrKtuBQuRka9wb8jljVhWL6&mime_type=video_mp4&qs=0&rc=NDZpZjxnaGU1O2ZnPDo3NEBpMzszdG85cnF2OzMzbGkzNEA0NmMyYTQxXzYxLWEwNF9fYSNicmJhMmRrcG1hLS1kLWJzcw%3D%3D&btag=80000e00010000&cquery=100z_100o_101r_100B_100x&dy_q=1784170911&feature_id=f5241e7604dff1d9d6c943fd20bd51a2&l=2026071611015167DCE2B2AE4D840420A3",
     },
     {
       id: 5,
@@ -76,6 +80,7 @@
       cat: "look",
       tag: "颜值高光",
       url: "https://www.douyin.com/video/7656396201361961905",
+      play: "https://v26-web.douyinvod.com/1cb02d4fa0133f6896be1298605b24d9/6a5873e3/video/tos/cn/tos-cn-ve-15c000-ce/oYQSBpcDyFfHJA2SEfIAiLITYeGHwAgPaeGR94/?a=6383&ch=10010&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C3&cv=1&br=1461&bt=1461&cs=0&ds=3&ft=pEaFx4hZffPdHK~2N12NvAq-antLjrKtuBQuRka9wb8jljVhWL6&mime_type=video_mp4&qs=0&rc=Zjc8Zmg2NTs1Z2dnPDlpOEBpanJ4PGs5cjVpPDMzbGkzNEAtXjE0M2MwXzYxM2IwYDQwYSMucDIwMmQ0ai1hLS1kLWJzcw%3D%3D&btag=80000e00010000&cquery=100x_100z_100o_101r_100B&dy_q=1784170911&feature_id=f5241e7604dff1d9d6c943fd20bd51a2&l=2026071611015167DCE2B2AE4D840420A3",
     },
     {
       id: 6,
@@ -87,6 +92,7 @@
       cat: "hot",
       tag: "热门",
       url: "https://www.douyin.com/video/7654536525598659579",
+      play: "https://v26-web.douyinvod.com/8bb6c83000f23ee709a39ede7d4f15cf/6a5873e5/video/tos/cn/tos-cn-ve-15c000-ce/ospJeODfFGu6dw0P07dYADkBnlxQIOgfgULC5E/?a=6383&ch=10010&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C3&cv=1&br=1265&bt=1265&cs=0&ds=3&ft=pEaFx4hZffPdHK~2N12NvAq-antLjrKtuBQuRka9wb8jljVhWL6&mime_type=video_mp4&qs=0&rc=NDQ7NTY6ZzRkOjxlNDc0Z0BpM3E2cmw5cmg4OzMzbGkzNUAwYTMtYDE2XzIxYl4yNjBjYSMzMV9tMmRrc3FhLS1kLTRzcw%3D%3D&btag=80000e00010000&cquery=100z_100o_101r_100B_100x&dy_q=1784170911&feature_id=f5241e7604dff1d9d6c943fd20bd51a2&l=2026071611015167DCE2B2AE4D840420A3",
     },
     {
       id: 7,
@@ -98,6 +104,7 @@
       cat: "hot",
       tag: "热门",
       url: "https://www.douyin.com/video/7655282441842275301",
+      play: "https://v26-web.douyinvod.com/1c990ff2d902facf78835b5877dd7165/6a5873e5/video/tos/cn/tos-cn-ve-15c000-ce/o0QfeFDF9AEsTEjzJ9EIPZCABQSwtuCBPqfC0U/?a=6383&ch=10010&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C3&cv=1&br=942&bt=942&cs=0&ds=3&ft=pEaFx4hZffPdHK~2N12NvAq-antLjrKtuBQuRka9wb8jljVhWL6&mime_type=video_mp4&qs=0&rc=ZTk3PDU0ZmRnN2g3M2U6OkBpM244bXE5cnZqOzMzbGkzNEAyYGJhNS80NjYxNC9iLjRfYSMuMmxjMmRzYHJhLS1kLWJzcw%3D%3D&btag=80000e00010000&cquery=100B_100x_100z_100o_101r&dy_q=1784170911&feature_id=f5241e7604dff1d9d6c943fd20bd51a2&l=2026071611015167DCE2B2AE4D840420A3",
     },
     {
       id: 8,
@@ -108,6 +115,7 @@
       cat: "hot",
       tag: "热门",
       url: "https://www.douyin.com/video/7659755685152802426",
+      play: "https://v26-web.douyinvod.com/9106ebc27b42d7a49221aaf65b5a92ed/6a5873f0/video/tos/cn/tos-cn-ve-15c000-ce/owAZqmBjqDIs0i3Mk655lMAEjP6lHxQxzi7va/?a=6383&ch=10010&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C3&cv=1&br=948&bt=948&cs=0&ds=3&ft=pEaFx4hZffPdHK~2N12NvAq-antLjrKtuBQuRka9wb8jljVhWL6&mime_type=video_mp4&qs=0&rc=OWZpZGc8aWQ6NWk5NGk4ZkBpM3R1eHE5cjZoPDMzbGkzNUBhNTVgMGNhX14xLi0zNmA1YSNqZ2AwMmRraTNhLS1kLTRzcw%3D%3D&btag=80000e00018000&cquery=100x_100z_100o_101r_100B&dy_q=1784170911&feature_id=f5241e7604dff1d9d6c943fd20bd51a2&l=2026071611015167DCE2B2AE4D840420A3",
     },
     {
       id: 9,
@@ -115,10 +123,11 @@
       desc: "我有点小腼腆呀～
 #少女感 #夏日甜妹 #甜系青春",
       cover: "assets/covers/7657889111659053179.jpg",
-      likes: "6831",
+      likes: "6834",
       cat: "look",
       tag: "颜值高光",
       url: "https://www.douyin.com/video/7657889111659053179",
+      play: "https://v26-web.douyinvod.com/d9fc681e45b4295d00e7624c573b571e/6a5873de/video/tos/cn/tos-cn-ve-15c000-ce/oIQGIgEf9StRAkDqmFRQfb09uloA0EFweSkZCt/?a=6383&ch=10010&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C3&cv=1&br=1588&bt=1588&cs=0&ds=3&ft=pEaFx4hZffPdHK~2N12NvAq-antLjrKtuBQuRka9wb8jljVhWL6&mime_type=video_mp4&qs=0&rc=ZjY1aWRpMzc7ZDtoNTo6N0Bpamd0cW45cnc3PDMzbGkzNEAxLTUvLV9iNTExL14wX2EtYSNvZmo2MmQ0ZjBhLS1kLWJzcw%3D%3D&btag=80000e00010000&cquery=100z_100o_101r_100B_100x&dy_q=1784170911&feature_id=f5241e7604dff1d9d6c943fd20bd51a2&l=2026071611015167DCE2B2AE4D840420A3",
     },
     {
       id: 10,
@@ -126,10 +135,11 @@
       desc: "温馨提示:下课不要趴桌子上睡觉
 #大学生 #少女感 #今天有甜到你吗",
       cover: "assets/covers/7654530129738589361.jpg",
-      likes: "6692",
+      likes: "6694",
       cat: "look",
       tag: "颜值高光",
       url: "https://www.douyin.com/video/7654530129738589361",
+      play: "https://v26-web.douyinvod.com/d47933a4fd1363b9cd6dc19f4ae8c3ac/6a5873e2/video/tos/cn/tos-cn-ve-15c000-ce/oA09tlb8DIRUa0zpA5Fgne9YDBf1qEEQELwnAO/?a=6383&ch=10010&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C3&cv=1&br=989&bt=989&cs=0&ds=3&ft=pEaFx4hZffPdHK~2N12NvAq-antLjrKtuBQuRka9wb8jljVhWL6&mime_type=video_mp4&qs=0&rc=NDM0ZzlpaDw2OmZnZzw3M0BpajR1N3M5cnA4OzMzbGkzNUAvLi01YV8vXy4xYTY0LzRjYSNqbXNzMmQ0aHFhLS1kLTRzcw%3D%3D&btag=80000e00010000&cquery=100z_100o_101r_100B_100x&dy_q=1784170911&feature_id=f5241e7604dff1d9d6c943fd20bd51a2&l=2026071611015167DCE2B2AE4D840420A3",
     },
     {
       id: 11,
@@ -141,6 +151,7 @@
       cat: "daily",
       tag: "日常分享",
       url: "https://www.douyin.com/video/7657129237920820849",
+      play: "https://v26-web.douyinvod.com/ccb95ef0327ed12a599aa6a5cf9aa484/6a5873d6/video/tos/cn/tos-cn-ve-15c000-ce/osBD7yevUQ8CBfJipChLt9yIIvGginAmdgeD0o/?a=6383&ch=10010&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C3&cv=1&br=1622&bt=1622&cs=0&ds=4&ft=pEaFx4hZffPdHK~2N12NvAq-antLjrKtuBQuRka9wb8jljVhWL6&mime_type=video_mp4&qs=0&rc=ZWQ5OTgzMzQ8OjY4OTczO0BpajNpZHI5cm1zPDMzbGkzNEAuM2FfXjEwXjUxYDAwMTZfYSNjZ2VoMmRrYC5hLS1kLWJzcw%3D%3D&btag=80000e00008000&cquery=100x_100z_100o_101r_100B&dy_q=1784170911&feature_id=37f92ebd2877ae8e7eba995d406c5150&l=2026071611015167DCE2B2AE4D840420A3",
     },
     {
       id: 12,
@@ -152,6 +163,7 @@
       cat: "look",
       tag: "颜值高光",
       url: "https://www.douyin.com/video/7652632586535249393",
+      play: "https://v26-web.douyinvod.com/28f097ea5f2827a84bfe46f879bcc40f/6a5873de/video/tos/cn/tos-cn-ve-15c000-ce/oYDZiE3gxIOMQFvA8eEfZmXaeuDsC9wXnqQ5AE/?a=6383&ch=10010&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C3&cv=1&br=961&bt=961&cs=0&ds=3&ft=pEaFx4hZffPdHK~2N12NvAq-antLjrKtuBQuRka9wb8jljVhWL6&mime_type=video_mp4&qs=0&rc=NmQ0ODpoNDYzNWdkaTM4OUBpM3hndXU5cm5zOzMzbGkzNEAtNTItNmAxNV4xXl8wYTEwYSNfYjNpMmQ0bG1hLS1kLWJzcw%3D%3D&btag=80000e00010000&cquery=100z_100o_101r_100B_100x&dy_q=1784170911&feature_id=f5241e7604dff1d9d6c943fd20bd51a2&l=2026071611015167DCE2B2AE4D840420A3",
     }
   ];
 
@@ -511,22 +523,32 @@
     }
     grid.innerHTML = list
       .map(
-        (w) => `
-      <a class="work-card reveal" data-cat="${w.cat}" href="${workHref(w)}" target="_blank" rel="noopener noreferrer" aria-label="在抖音查看：${escapeHtml(w.title)}">
+        (w, idx) => `
+      <button type="button" class="work-card reveal" data-cat="${w.cat}" data-work-idx="${
+          WORKS.indexOf(w) >= 0 ? WORKS.indexOf(w) : idx
+        }" aria-label="播放：${escapeHtml(w.title)}">
         <div class="work-cover">
           <img src="${w.cover}" alt="${escapeHtml(w.title)}" loading="lazy" decoding="async" />
           <span class="work-badge">${escapeHtml(w.tag)}</span>
           <span class="work-likes">♡ ${escapeHtml(w.likes)}</span>
-          <span class="work-play" aria-hidden="true">▶ 抖音</span>
+          <span class="work-play" aria-hidden="true">▶ 播放</span>
         </div>
         <div class="work-body">
           <h3>${escapeHtml(w.title)}</h3>
           <p>${escapeHtml(w.desc)}</p>
-          <span class="work-cta">去抖音看 TA →</span>
+          <span class="work-cta">站内播放 →</span>
         </div>
-      </a>`
+      </button>`
       )
       .join("");
+
+    grid.querySelectorAll("[data-work-idx]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const i = Number(btn.getAttribute("data-work-idx"));
+        const w = WORKS[i];
+        if (w) openVideoPlayer(w);
+      });
+    });
     bindImgFallback(grid);
     observeReveals(grid);
   }
@@ -537,6 +559,93 @@
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;");
+  }
+
+  /* ---------- 站内视频播放（抖音直链；失败则跳转视频页） ---------- */
+  function openVideoPlayer(w) {
+    const modal = $("#videoModal");
+    const video = $("#videoPlayer");
+    const title = $("#videoModalTitle");
+    const link = $("#videoOpenDouyin");
+    const hint = $("#videoPlayHint");
+    if (!modal || !video) {
+      window.open(workHref(w), "_blank", "noopener,noreferrer");
+      return;
+    }
+
+    if (title) title.textContent = w.title || "憨宝宝作品";
+    if (link) {
+      link.href = workHref(w);
+      link.hidden = false;
+    }
+    if (hint) {
+      hint.textContent = w.play
+        ? "正在加载抖音源… 若无法播放请点「打开抖音」。"
+        : "暂无直链，将打开抖音视频页。";
+    }
+
+    // reset
+    video.pause();
+    video.removeAttribute("src");
+    video.load();
+
+    const playUrl = w.play || "";
+    const fallback = () => {
+      if (hint) hint.textContent = "直链失效或受限，请用下方按钮在抖音观看。";
+      toast("直链暂不可播，可打开抖音观看");
+    };
+
+    modal.hidden = false;
+    document.body.style.overflow = "hidden";
+
+    if (!playUrl) {
+      fallback();
+      return;
+    }
+
+    video.src = playUrl;
+    video.playsInline = true;
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+
+    const onErr = () => {
+      fallback();
+      video.removeEventListener("error", onErr);
+    };
+    video.addEventListener("error", onErr);
+
+    const p = video.play();
+    if (p && typeof p.catch === "function") {
+      p.then(() => {
+        if (hint) hint.textContent = "播放中 · 源来自抖音 CDN（不占用本站存储）";
+      }).catch(() => {
+        // 自动播放被拦时，等用户点播放按钮即可
+        if (hint) hint.textContent = "请点击播放器中央的播放按钮";
+      });
+    }
+  }
+
+  function closeVideoPlayer() {
+    const modal = $("#videoModal");
+    const video = $("#videoPlayer");
+    if (video) {
+      video.pause();
+      video.removeAttribute("src");
+      video.load();
+    }
+    if (modal) modal.hidden = true;
+    document.body.style.overflow = "";
+  }
+
+  function initVideoPlayer() {
+    $("#videoModalClose")?.addEventListener("click", closeVideoPlayer);
+    $("#videoModalClose2")?.addEventListener("click", closeVideoPlayer);
+    $("#videoModal")?.addEventListener("click", (e) => {
+      if (e.target.id === "videoModal") closeVideoPlayer();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeVideoPlayer();
+    });
   }
 
   function initWorkFilters() {
@@ -946,6 +1055,7 @@
     initStatsObserver();
     renderWorks("all");
     initWorkFilters();
+    initVideoPlayer();
     renderTimeline();
     renderRank();
     renderAssets();

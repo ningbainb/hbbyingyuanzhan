@@ -18,10 +18,11 @@ for w in works:
         f"      cat: {json.dumps(w['cat'], ensure_ascii=False)},\n"
         f"      tag: {json.dumps(w['tag'], ensure_ascii=False)},\n"
         f"      url: {json.dumps(w['url'], ensure_ascii=False)},\n"
+        f"      play: {json.dumps(w.get('play') or '', ensure_ascii=False)},\n"
         "    }"
     )
 block = (
-    "  /* 抖音真实作品（share 页链接稳定；直链 play_url 会过期故不使用） */\n"
+    "  /* 抖音真实作品：url=视频页，play=直链（会过期，需定期 fetch_videos） */\n"
     "  const DOUYIN_HOME = \"https://v.douyin.com/3Ed4QuQJTBA/\";\n"
     "  const WORKS = [\n" + ",\n".join(items) + "\n  ];\n"
 )
